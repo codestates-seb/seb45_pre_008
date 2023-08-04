@@ -1,22 +1,23 @@
-##🎯 코드 돌림판
+## 🎯 코드 돌림판
 
 <hr>
-###🐼 Team Member
+### 🐼 Team Member
 <hr>
-###🛠️ Tech Stack
-<hr>
-
-###🗂️ Pages
-
+### 🛠️ Tech Stack
 <hr>
 
-###📃 Docs
+### 🗂️ Pages
 
 <hr>
 
-###🧑🏻‍💻Git
+### 📃 Docs
+
+<hr>
+
+### 🧑🏻‍💻Git
 
  <hr>
+
 ### branch
 
 > `Pull Request` 와 `Code Review` 가 이루어진 후, 병합을 진행해야 한다.
