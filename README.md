@@ -32,10 +32,10 @@
 
 - `main` : 배포 브랜치
 - `dev` : `fe` / `be` 작업 테스트 병합 브랜치
-- `fe` : Front-End 개발 브랜치
-- `be` : Back-End 개발 브랜치
-- `be-feat/기능 이름/#이슈번호` : BE 기능 개발 브랜치
-- `fe-feat/기능 이름/#이슈번호` : FE 기능 개발 브랜치
+- `feDev` : Front-End 개발 브랜치
+- `beDev` : Back-End 개발 브랜치
+- `beDev-feat/기능 이름/#이슈번호` : BE 기능 개발 브랜치
+- `feDev-feat/기능 이름/#이슈번호` : FE 기능 개발 브랜치
 
 ### Git 저장소 이용법
 
