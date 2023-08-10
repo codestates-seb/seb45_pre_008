@@ -25,6 +25,9 @@ const FooterComponent = styled.footer`
       @media screen and (max-width: 980px) {
         flex: auto;
       }
+      @media screen and (max-width: 640px) {
+        display: none;
+      }
     }
 
     .footer-menu--container {
