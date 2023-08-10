@@ -2,7 +2,111 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { ReactComponent as FooterLogo } from '../assets/images/footer-logo.svg';
 
-const FooterComponent = styled.footer``;
+const FooterComponent = styled.footer`
+  width: 100%;
+  background-color: hsl(210, 8%, 15%);
+  color: hsl(210, 8%, 60%);
+
+  .footer-container {
+    max-width: 1264px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 32px 12px 12px;
+    display: flex;
+    flex-flow: row wrap;
+    @media screen and (max-width: 980px) {
+      flex-direction: column;
+      padding: 24px;
+    }
+
+    .footer-logo {
+      flex: 0 0 64px;
+      margin: -12px 0 32px;
+      @media screen and (max-width: 980px) {
+        flex: auto;
+      }
+    }
+
+    .footer-menu--container {
+      display: flex;
+      flex: 2 1 auto;
+      @media screen and (max-width: 980px) {
+        flex-direction: column;
+      }
+      > ul {
+        flex: 1 0 auto;
+        padding: 0 12px 24px 0;
+        > h5 {
+          margin: 0 0 12px;
+          color: hsl(210, 8%, 75%);
+        }
+        > li {
+          line-height: 2;
+          font-size: 13px;
+          @media screen and (max-width: 980px) {
+            float: left;
+            padding-right: 12px;
+          }
+        }
+      }
+    }
+
+    .api-menu {
+      margin-top: 16px;
+      @media screen and (max-width: 980px) {
+        margin: 0;
+      }
+    }
+
+    .sns-copyright {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 150px;
+      font-size: 11px;
+      @media screen and (max-width: 980px) {
+        margin-top: 24px;
+        flex: 1 1 auto;
+      }
+
+      .sns-container {
+        > ul {
+          padding: 0;
+          display: flex;
+          > li {
+            margin-left: 12px;
+            padding: 4px 0;
+
+            &:first-child {
+              margin: 0;
+            }
+          }
+        }
+      }
+
+      .copyright-container {
+        margin: auto 0 24px;
+        @media screen and (max-width: 980px) {
+          margin: 0;
+        }
+        > p {
+          > span {
+            > a {
+              text-decoration: underline;
+              color: inherit;
+            }
+          }
+        }
+      }
+
+      .revision {
+        display: block;
+        @media screen and (max-width: 980px) {
+          display: contents;
+        }
+      }
+    }
+  }
+`;
 
 const Footer = () => {
   return (
