@@ -1,13 +1,13 @@
-import React from 'react'; // eslint-disable-line no-unused-vars
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App.jsx';
-import store from './store';
-import { Provider } from 'react-redux';
+import GlobalStyle from './assets/styles/GlobalStyle.jsx';
+import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <Provider store={store}>
+  <BrowserRouter>
+    <GlobalStyle />
     <App />
-  </Provider>,
+  </BrowserRouter>,
 );
