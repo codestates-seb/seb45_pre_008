@@ -1,7 +1,7 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
-import stackoverflow from '../assets/stackoverflow.svg';
+import stackoverflow from '../assets/images/stackoverflow.svg';
 import styled from 'styled-components';
-import OauthButton from '../componets/OauthButton.jsx';
+import OauthButton from '../components/OauthButton.jsx';
 
 const LoginPage = styled.div`
   display: flex;
