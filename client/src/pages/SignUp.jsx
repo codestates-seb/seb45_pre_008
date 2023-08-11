@@ -1,24 +1,28 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
-import stackoverflow from '../assets/stackoverflow.svg';
 import styled from 'styled-components';
 import OauthButton from '../componets/OauthButton.jsx';
 
-const LoginPage = styled.div`
+const SignUpContainer = styled.div`
+  display: flex;
+  background-color: #f1f2f3;
+  justify-content: center;
+  align-items: center;
+`;
+
+const SignUpExplain = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const SignUpPage = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f1f2f3;
 `;
 
-const Logo = styled.img`
-  width: 35px;
-  height: 37px;
-  margin-bottom: 10px;
-`;
-
-const LoginForm = styled.form`
+const SignUpForm = styled.form`
   width: 300px;
   padding: 20px;
   border: 1px solid #ccc;
@@ -35,17 +39,11 @@ const FormLabel = styled.label`
 `;
 
 const FormInput = styled.input`
-  width: 95%;
+  width: 100%;
   padding: 8px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 3px;
-`;
-
-const FormField = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 `;
 
 const SubmitButton = styled.button`
@@ -61,38 +59,33 @@ const SubmitButton = styled.button`
   }
 `;
 
-const ForgotPasswordButton = styled.button`
-  background-color: transparent;
+const SignInLink = styled.a`
+  text-decoration: underline;
   color: #0077cc;
-  border: none;
   cursor: pointer;
-  font-size: 12px;
-  margin-top: 5px;
+  margin-top: 10px;
 `;
 
-const Extend = styled.p`
-  margin-top: 20px;
-`;
-
-export default function Login() {
+export default function SignUp() {
   return (
-    <>
-      <LoginPage>
-        <Logo src={stackoverflow} alt="Stack Overflow Logo" />
+    <SignUpContainer>
+      <SignUpExplain>Join the Stack Overflow community</SignUpExplain>
+      <SignUpPage>
         <OauthButton />
-        <LoginForm>
+        <SignUpForm>
+          <FormLabel htmlFor="username">Display name:</FormLabel>
+          <FormInput type="text" id="username" placeholder="Username" />
           <FormLabel htmlFor="email">Email:</FormLabel>
           <FormInput type="email" id="email" placeholder="Email" />
-          <FormField>
-            <FormLabel htmlFor="password">Password:</FormLabel>
-            <ForgotPasswordButton>Forgot Password?</ForgotPasswordButton>
-          </FormField>
+          <FormLabel htmlFor="password">Password:</FormLabel>
           <FormInput type="password" id="password" placeholder="Password" />
-          <SubmitButton type="submit">Login</SubmitButton>
-        </LoginForm>
-        <Extend>Don &lsquo;t have an account? Sign up</Extend>
-        <Extend>Are you an employer? Sign up on Talent</Extend>
-      </LoginPage>
-    </>
+          <SubmitButton type="submit">Sign Up</SubmitButton>
+        </SignUpForm>
+        <SignInLink href="/signin">Already have an account? Log in</SignInLink>
+        <SignInLink href="/signin">
+          Are you an employer? Sign up on Talent
+        </SignInLink>
+      </SignUpPage>
+    </SignUpContainer>
   );
 }
