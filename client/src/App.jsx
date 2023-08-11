@@ -1,6 +1,5 @@
 import './App.css';
-import GlobalStyle from './assets/styles/GlobalStyle.jsx';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer.jsx';
 import Header from './components/Header.jsx';
 import Login from './pages/Login.jsx';
@@ -8,14 +7,11 @@ import Login from './pages/Login.jsx';
 function App() {
   return (
     <>
-      <GlobalStyle />
-      <BrowserRouter>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Login />} />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Login />} />
+      </Routes>
+      <Footer />
     </>
   );
 }
