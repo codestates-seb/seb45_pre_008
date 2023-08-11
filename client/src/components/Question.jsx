@@ -51,8 +51,7 @@ const StepsList = styled.li`
   color: #3b4045;
 `;
 const LinkAddress = styled.a`
-  color: rgb(0, 116, 204);
-  text-decoration: none;
+  color: rgb(0, 116, 204) !important;
   margin: 0px 4px 0px 4px;
   cursor: pointer;
   &:hover {
@@ -150,17 +149,23 @@ export default function Question() {
           to find a relevant site.
         </InformStory>
         <InformSteps>Steps</InformSteps>
-        <StepsUl>
-          <StepsList>Summarize your problem in a one-line title.</StepsList>
-          <StepsList>Describe your problem in more detail.</StepsList>
-          <StepsList>
+        <StepsUl className="steps-ul">
+          <StepsList className="steps-list">
+            Summarize your problem in a one-line title.
+          </StepsList>
+          <StepsList className="steps-list">
+            Describe your problem in more detail.
+          </StepsList>
+          <StepsList className="steps-list">
             Describe what you tried and what you expected to happen.
           </StepsList>
-          <StepsList>
+          <StepsList className="steps-list">
             Add “tags” which help surface your question to members of the
             community.
           </StepsList>
-          <StepsList>Review your question and post it to the site.</StepsList>
+          <StepsList className="steps-list">
+            Review your question and post it to the site.
+          </StepsList>
         </StepsUl>
       </InformBox>
       <QuestionBox>
@@ -202,7 +207,7 @@ export default function Question() {
         <QuestionContent placeholder="e.g. (c flutter django)"></QuestionContent>
         <NextButton>Next</NextButton>
       </QuestionBox>
-      <DescribeContainer>
+      <DescribeContainer className="describe-container-1 relative">
         <DescribeTop>Wirting a good title</DescribeTop>
         <DescribeBottom>
           your title should summarize the problem.
@@ -212,14 +217,14 @@ export default function Question() {
           out the rest of the question.
         </DescribeBottom>
       </DescribeContainer>
-      <DescribeContainer>
+      <DescribeContainer className="describe-container-2 relative">
         <DescribeTop>Introduce the problem</DescribeTop>
         <DescribeBottom>
           Explain how you encountered the problem you’re trying to solve, and
           any difficulties that have prevented you from solving it yourself.
         </DescribeBottom>
       </DescribeContainer>
-      <DescribeContainer>
+      <DescribeContainer className="describe-container-3 relative">
         <DescribeTop>Expand on the problem</DescribeTop>
         <DescribeBottom>
           Show what you’ve tried, tell us what happened, and why it didn’t meet
