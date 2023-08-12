@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Draft from './Draft.jsx';
+import Writing from './../assets/images/writing-logo.svg';
 
 const MainBox = styled.main`
   padding: 0px 24px 24px;
@@ -58,14 +59,21 @@ const LinkAddress = styled.a`
     color: rgb(53, 141, 250);
   }
 `;
+const QuestionContainer = styled.div`
+  display: flex;
+  margin: 16px 0px 0px 0px;
+  gap: 14px;
+`;
 const QuestionBox = styled.div`
   padding: 24px;
-  margin: 16px 0px 0px 0px;
   background-color: #ffffff;
   border: 1px solid rgb(228, 230, 232);
   border-radius: 8px;
   width: 70%;
   max-width: 800px;
+`;
+const TagBox = styled(QuestionBox)`
+  margin: 16px 0px 0px 0px;
 `;
 const QuestionBoxTitle = styled.div`
   font-size: 15px;
@@ -106,11 +114,18 @@ const NextButton = styled.button`
     background-color: rgb(36, 105, 194);
   }
 `;
-const DescribeContainer = styled.div`
+const DescribeContainer1 = styled.div`
   width: 350px;
+  height: 180px;
   background-color: #ffffff;
   border: 1px solid rgb(214, 217, 220);
   border-radius: 6px;
+`;
+const DescribeContainer2 = styled(DescribeContainer1)`
+  height: 150px;
+`;
+const DescribeContainer3 = styled(DescribeContainer1)`
+  height: 300px;
 `;
 const DescribeTop = styled.div`
   padding: 12px;
@@ -120,8 +135,16 @@ const DescribeTop = styled.div`
 `;
 const DescribeBottom = styled.div`
   margin: 16px;
-  font-size: 12px;
   background-color: #ffffff;
+  display: flex;
+`;
+const DescribeBottomContent = styled.p`
+  margin: 0 0 16px 16px;
+  font-size: 12px;
+`;
+const WritingLogo = styled.img`
+  width: 36px;
+  height: 36px;
 `;
 
 export default function Question() {
@@ -168,37 +191,100 @@ export default function Question() {
           </StepsList>
         </StepsUl>
       </InformBox>
-      <QuestionBox>
-        <QuestionBoxTitle>Title</QuestionBoxTitle>
-        <QuestionBoxSubTitle>
-          Be specific and imagine you’re asking a question to another person.
-        </QuestionBoxSubTitle>
-        <QuestionContent placeholder="e.g. Is there an R function for finding the index of an element in a vector?"></QuestionContent>
-        <NextButton>Next</NextButton>
-      </QuestionBox>
-      <QuestionBox>
-        <QuestionBoxTitle>
-          What are the details of your problem?
-        </QuestionBoxTitle>
-        <QuestionBoxSubTitle>
-          Introduce the problem and expand on what you put in the title. Minimum
-          20 characters.
-        </QuestionBoxSubTitle>
-        <Draft />
-        <NextButton>Next</NextButton>
-      </QuestionBox>
-      <QuestionBox>
-        <QuestionBoxTitle>
-          What did you try and what were you expecting?
-        </QuestionBoxTitle>
-        <QuestionBoxSubTitle>
-          Describe what you tried, what you expected to happen, and what
-          actually resulted. Minimum 20 characters.
-        </QuestionBoxSubTitle>
-        <Draft />
-        <NextButton>Next</NextButton>
-      </QuestionBox>
-      <QuestionBox>
+      <QuestionContainer>
+        <QuestionBox>
+          <QuestionBoxTitle>Title</QuestionBoxTitle>
+          <QuestionBoxSubTitle>
+            Be specific and imagine you’re asking a question to another person.
+          </QuestionBoxSubTitle>
+          <QuestionContent placeholder="e.g. Is there an R function for finding the index of an element in a vector?"></QuestionContent>
+          <NextButton>Next</NextButton>
+        </QuestionBox>
+        <DescribeContainer1>
+          <DescribeTop>Wirting a good title</DescribeTop>
+          <DescribeBottom>
+            <WritingLogo src={Writing} />
+            <div>
+              <DescribeBottomContent>
+                your title should summarize the problem.
+              </DescribeBottomContent>
+              <DescribeBottomContent>
+                You might find that you have a better idea of your title after
+                writing out the rest of the question.
+              </DescribeBottomContent>
+            </div>
+          </DescribeBottom>
+        </DescribeContainer1>
+      </QuestionContainer>
+      <QuestionContainer>
+        <QuestionBox>
+          <QuestionBoxTitle>
+            What are the details of your problem?
+          </QuestionBoxTitle>
+          <QuestionBoxSubTitle>
+            Introduce the problem and expand on what you put in the title.
+            Minimum 20 characters.
+          </QuestionBoxSubTitle>
+          <Draft />
+          <NextButton>Next</NextButton>
+        </QuestionBox>
+        <DescribeContainer2>
+          <DescribeTop>Introduce the problem</DescribeTop>
+          <DescribeBottom>
+            <WritingLogo src={Writing} />
+            <DescribeBottomContent>
+              Explain how you encountered the problem you’re trying to solve,
+              and any difficulties that have prevented you from solving it
+              yourself.
+            </DescribeBottomContent>
+          </DescribeBottom>
+        </DescribeContainer2>
+      </QuestionContainer>
+      <QuestionContainer>
+        <QuestionBox>
+          <QuestionBoxTitle>
+            What did you try and what were you expecting?
+          </QuestionBoxTitle>
+          <QuestionBoxSubTitle>
+            Describe what you tried, what you expected to happen, and what
+            actually resulted. Minimum 20 characters.
+          </QuestionBoxSubTitle>
+          <Draft />
+          <NextButton>Next</NextButton>
+        </QuestionBox>
+        <DescribeContainer3>
+          <DescribeTop>Expand on the problem</DescribeTop>
+          <DescribeBottom>
+            <WritingLogo src={Writing} />
+            <div>
+              <DescribeBottomContent>
+                Show what you’ve tried, tell us what happened, and why it didn’t
+                meet your needs.
+              </DescribeBottomContent>
+              <DescribeBottomContent>
+                Not all questions benefit from including code, but if your
+                problem is better understood with code you’ve written, you
+                should include a
+                <LinkAddress href="https://stackoverflow.com/help/minimal-reproducible-example">
+                  minimal, reproducible example.
+                </LinkAddress>
+              </DescribeBottomContent>
+              <DescribeBottomContent>
+                Please make sure to post code and errors as text directly to the
+                question (and{' '}
+                <LinkAddress href="https://meta.stackoverflow.com/questions/285551/why-should-i-not-upload-images-of-code-data-errors">
+                  not as images
+                </LinkAddress>
+                ), and{' '}
+                <LinkAddress href="https://stackoverflow.com/help/formatting">
+                  format them appropriately.
+                </LinkAddress>
+              </DescribeBottomContent>
+            </div>
+          </DescribeBottom>
+        </DescribeContainer3>
+      </QuestionContainer>
+      <TagBox>
         <QuestionBoxTitle>Tags</QuestionBoxTitle>
         <QuestionBoxSubTitle>
           Add up to 5 tags to describe what your question is about. Start typing
@@ -206,49 +292,7 @@ export default function Question() {
         </QuestionBoxSubTitle>
         <QuestionContent placeholder="e.g. (c flutter django)"></QuestionContent>
         <NextButton>Next</NextButton>
-      </QuestionBox>
-      <DescribeContainer className="describe-container-1 relative">
-        <DescribeTop>Wirting a good title</DescribeTop>
-        <DescribeBottom>
-          your title should summarize the problem.
-        </DescribeBottom>
-        <DescribeBottom>
-          You might find that you have a better idea of your title after writing
-          out the rest of the question.
-        </DescribeBottom>
-      </DescribeContainer>
-      <DescribeContainer className="describe-container-2 relative">
-        <DescribeTop>Introduce the problem</DescribeTop>
-        <DescribeBottom>
-          Explain how you encountered the problem you’re trying to solve, and
-          any difficulties that have prevented you from solving it yourself.
-        </DescribeBottom>
-      </DescribeContainer>
-      <DescribeContainer className="describe-container-3 relative">
-        <DescribeTop>Expand on the problem</DescribeTop>
-        <DescribeBottom>
-          Show what you’ve tried, tell us what happened, and why it didn’t meet
-          your needs.
-        </DescribeBottom>
-        <DescribeBottom>
-          Not all questions benefit from including code, but if your problem is
-          better understood with code you’ve written, you should include a
-          <LinkAddress href="https://stackoverflow.com/help/minimal-reproducible-example">
-            minimal, reproducible example.
-          </LinkAddress>
-        </DescribeBottom>
-        <DescribeBottom>
-          Please make sure to post code and errors as text directly to the
-          question (and{' '}
-          <LinkAddress href="https://meta.stackoverflow.com/questions/285551/why-should-i-not-upload-images-of-code-data-errors">
-            not as images
-          </LinkAddress>
-          ), and{' '}
-          <LinkAddress href="https://stackoverflow.com/help/formatting">
-            format them appropriately.
-          </LinkAddress>
-        </DescribeBottom>
-      </DescribeContainer>
+      </TagBox>
     </MainBox>
   );
 }
