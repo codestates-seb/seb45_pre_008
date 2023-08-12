@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import Draft from './Draft.jsx';
 import Writing from './../assets/images/writing-logo.svg';
+import { useState } from 'react';
 
 const MainBox = styled.main`
   padding: 0px 24px 24px;
   background-color: #f8f9f9;
 `;
-
 const MainTitle = styled.h1`
   margin: 0px 0px 4px;
   padding: 24px 0 0 0;
@@ -14,7 +14,6 @@ const MainTitle = styled.h1`
   color: #232629;
   height: 86px;
 `;
-
 const InformBox = styled.div`
   width: 70%;
   max-width: 800px;
@@ -23,20 +22,17 @@ const InformBox = styled.div`
   border: 1px solid rgb(166, 206, 237);
   border-radius: 8px;
 `;
-
 const InformTitle = styled.h2`
   font-size: 21px;
   font-weight: 500;
   color: #3b4045;
   margin: 0px 0px 8px;
 `;
-
 const InformStory = styled.p`
   font-size: 15px;
   color: #3b4045;
   margin: 0px;
 `;
-
 const InformSteps = styled.h5`
   font-size: 13px;
   font-weight: 600;
@@ -114,6 +110,16 @@ const NextButton = styled.button`
     background-color: rgb(36, 105, 194);
   }
 `;
+const InvalidNextButton = styled.button`
+  padding: 10.4px;
+  margin: 8px 0 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: rgb(151, 197, 252);
+  border: none;
+  border-radius: 6px;
+`;
 const DescribeContainer1 = styled.div`
   width: 350px;
   height: 180px;
@@ -143,11 +149,26 @@ const DescribeBottomContent = styled.p`
   font-size: 12px;
 `;
 const WritingLogo = styled.img`
-  width: 36px;
-  height: 36px;
+  width: 48px;
+  height: 48px;
 `;
 
 export default function Question() {
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [subContent, setSubContent] = useState('');
+  const handleChangeTitle = (e) => {
+    setTitle(e.target.value);
+  };
+  const handleChangeContent = (e) => {
+    setContent(e.target.value);
+  };
+  const handleChangeSubContent = (e) => {
+    setSubContent(e.target.value);
+  };
+  const isTitleValid = title.length >= 15;
+  const isContentValid = content.length >= 20;
+  const isSubContentValid = subContent.length >= 20;
   return (
     <MainBox>
       <MainTitle>Ask a public question</MainTitle>
@@ -197,8 +218,16 @@ export default function Question() {
           <QuestionBoxSubTitle>
             Be specific and imagine you’re asking a question to another person.
           </QuestionBoxSubTitle>
-          <QuestionContent placeholder="e.g. Is there an R function for finding the index of an element in a vector?"></QuestionContent>
-          <NextButton>Next</NextButton>
+          <QuestionContent
+            placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
+            value={title}
+            onChange={handleChangeTitle}
+          ></QuestionContent>
+          {isTitleValid ? (
+            <NextButton disabled={!isTitleValid}>Next</NextButton>
+          ) : (
+            <InvalidNextButton>Next</InvalidNextButton>
+          )}
         </QuestionBox>
         <DescribeContainer1>
           <DescribeTop>Wirting a good title</DescribeTop>
@@ -225,8 +254,12 @@ export default function Question() {
             Introduce the problem and expand on what you put in the title.
             Minimum 20 characters.
           </QuestionBoxSubTitle>
-          <Draft />
-          <NextButton>Next</NextButton>
+          <Draft value={content} onChange={handleChangeContent} />
+          {isContentValid ? (
+            <NextButton disabled={!isContentValid}>Next</NextButton>
+          ) : (
+            <InvalidNextButton>Next</InvalidNextButton>
+          )}
         </QuestionBox>
         <DescribeContainer2>
           <DescribeTop>Introduce the problem</DescribeTop>
@@ -249,8 +282,12 @@ export default function Question() {
             Describe what you tried, what you expected to happen, and what
             actually resulted. Minimum 20 characters.
           </QuestionBoxSubTitle>
-          <Draft />
-          <NextButton>Next</NextButton>
+          <Draft value={setContent} onChange={handleChangeSubContent} />
+          {isSubContentValid ? (
+            <NextButton disabled={!isSubContentValid}>Next</NextButton>
+          ) : (
+            <InvalidNextButton>Next</InvalidNextButton>
+          )}
         </QuestionBox>
         <DescribeContainer3>
           <DescribeTop>Expand on the problem</DescribeTop>
