@@ -68,7 +68,7 @@ const QuestionBox = styled.div`
   width: 70%;
   max-width: 800px;
 `;
-const TagBox = styled(QuestionBox)`
+const TagBoxContainer = styled(QuestionBox)`
   margin: 16px 0px 0px 0px;
 `;
 const QuestionBoxTitle = styled.div`
@@ -152,11 +152,60 @@ const WritingLogo = styled.img`
   width: 48px;
   height: 48px;
 `;
+const TagBox = styled.div`
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 10px 0 0 0;
+  padding: 7.8px 9.1px;
+  border: 1px solid rgb(186, 191, 196);
+  border-radius: 8px;
+  ::placeholder {
+    color: rgb(202, 206, 209);
+  }
+  &:focus-within {
+    border-color: rgb(104, 167, 221);
+    outline: none;
+    box-shadow: 0 0 3px 3px rgb(225, 236, 248);
+  }
+`;
+const TagItem = styled.div`
+  display: flex;
+  gap: 4px;
+  padding: 5px;
+  background-color: rgb(225, 236, 244);
+  border-radius: 5px;
+  color: rgb(57, 115, 156);
+  font-size: 12px;
+`;
+const DeleteButton = styled.button`
+  all: unset;
+  width: 14px;
+  height: 14px;
+  text-align: center;
+  color: rgb(57, 115, 157);
+  border-radius: 2px;
+  &:hover {
+    background-color: rgb(57, 115, 157);
+    color: rgb(225, 236, 244);
+    width: 14px;
+    height: 14px;
+  }
+`;
+const TagInput = styled.input`
+  border: none;
+  outline: none;
+  cursor: text;
+`;
 
 export default function Question() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [subContent, setSubContent] = useState('');
+  const [tagItem, setTagItem] = useState('');
+  const [tagList, setTagList] = useState([]);
+
   const handleChangeTitle = (e) => {
     setTitle(e.target.value);
   };
@@ -166,9 +215,29 @@ export default function Question() {
   const handleChangeSubContent = (e) => {
     setSubContent(e.target.value);
   };
+  const onKeyPress = (e) => {
+    if (e.target.value.length !== 0 && e.key === 'Enter') {
+      submitTagItem();
+    }
+  };
+  const submitTagItem = () => {
+    const updatedTagList = [...tagList];
+    updatedTagList.push(tagItem);
+    setTagList(updatedTagList);
+    setTagItem('');
+  };
+  const deleteTagItem = (e) => {
+    const deleteTagItem = e.target.parentElement.firstChild.innerText;
+    const filteredTagList = tagList.filter(
+      (tagItem) => tagItem !== deleteTagItem,
+    );
+    setTagList(filteredTagList);
+  };
+
   const isTitleValid = title.length >= 15;
   const isContentValid = content.length >= 20;
   const isSubContentValid = subContent.length >= 20;
+
   return (
     <MainBox>
       <MainTitle>Ask a public question</MainTitle>
@@ -254,7 +323,11 @@ export default function Question() {
             Introduce the problem and expand on what you put in the title.
             Minimum 20 characters.
           </QuestionBoxSubTitle>
-          <Draft value={content} onChange={handleChangeContent} />
+          <Draft
+            value={content}
+            onChange={handleChangeContent}
+            minlength={20}
+          />
           {isContentValid ? (
             <NextButton disabled={!isContentValid}>Next</NextButton>
           ) : (
@@ -282,7 +355,7 @@ export default function Question() {
             Describe what you tried, what you expected to happen, and what
             actually resulted. Minimum 20 characters.
           </QuestionBoxSubTitle>
-          <Draft value={setContent} onChange={handleChangeSubContent} />
+          <Draft value={subContent} onChange={handleChangeSubContent} />
           {isSubContentValid ? (
             <NextButton disabled={!isSubContentValid}>Next</NextButton>
           ) : (
@@ -321,15 +394,31 @@ export default function Question() {
           </DescribeBottom>
         </DescribeContainer3>
       </QuestionContainer>
-      <TagBox>
+      <TagBoxContainer>
         <QuestionBoxTitle>Tags</QuestionBoxTitle>
         <QuestionBoxSubTitle>
           Add up to 5 tags to describe what your question is about. Start typing
           to see suggestions.
         </QuestionBoxSubTitle>
-        <QuestionContent placeholder="e.g. (c flutter django)"></QuestionContent>
+        <TagBox>
+          {tagList.map((tagItem, index) => {
+            return (
+              <TagItem key={index}>
+                <span>{tagItem}</span>
+                <DeleteButton onClick={deleteTagItem}>X</DeleteButton>
+              </TagItem>
+            );
+          })}
+          <TagInput
+            type="text"
+            placeholder="e.g. (c flutter django)"
+            onChange={(e) => setTagItem(e.target.value)}
+            value={tagItem}
+            onKeyPress={onKeyPress}
+          />
+        </TagBox>
         <NextButton>Next</NextButton>
-      </TagBox>
+      </TagBoxContainer>
     </MainBox>
   );
 }
