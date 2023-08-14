@@ -6,17 +6,17 @@ import {
   QuestionBoxTitle,
   QuestionBoxSubTitle,
   NextButton,
-  //   DescribeContainer1,
-  //   DescribeTop,
-  //   DescribeBottom,
-  //   DescribeBottomContent,
-  //   LinkAddress,
-  //   WritingLogo,
+  DescribeContainer1,
+  DescribeTop,
+  DescribeBottom,
+  DescribeBottomContent,
+  LinkAddress,
+  WritingLogo,
 } from './../assets/styles/QuestionStyle.jsx';
-// import Writing from './../assets/images/writing-logo.svg';
+import Writing from './../assets/images/writing-logo.svg';
 
 const TagBoxContainer = styled(QuestionBox)`
-  margin: 16px 0px 0px 0px;
+  margin: 0 0 64px 0;
 `;
 const TagBox = styled.div`
   display: flex;
@@ -64,9 +64,9 @@ const TagInput = styled.input`
   outline: none;
   cursor: text;
 `;
-// const DescribeContainer4 = styled(DescribeContainer1)`
-//   height: 300px;
-// `;
+const DescribeContainer4 = styled(DescribeContainer1)`
+  height: 240px;
+`;
 
 export default function Tag() {
   const [tagItem, setTagItem] = useState('');
@@ -119,37 +119,28 @@ export default function Tag() {
         </TagBox>
         <NextButton>Next</NextButton>
       </TagBoxContainer>
-      {/* <DescribeContainer4>
-        <DescribeTop>Expand on the problem</DescribeTop>
+      <DescribeContainer4>
+        <DescribeTop>Adding tags</DescribeTop>
         <DescribeBottom>
           <WritingLogo src={Writing} />
           <div>
             <DescribeBottomContent>
-              Show what you’ve tried, tell us what happened, and why it didn’t
-              meet your needs.
+              Tags help ensure that your question will get attention from the
+              right people.
             </DescribeBottomContent>
             <DescribeBottomContent>
-              Not all questions benefit from including code, but if your problem
-              is better understood with code you’ve written, you should include
-              a
-              <LinkAddress href="https://stackoverflow.com/help/minimal-reproducible-example">
-                minimal, reproducible example.
-              </LinkAddress>
+              Tag things in more than one way so people can find them more
+              easily. Add tags for product lines, projects, teams, and the
+              specific technologies or languages used.
             </DescribeBottomContent>
             <DescribeBottomContent>
-              Please make sure to post code and errors as text directly to the
-              question (and{' '}
-              <LinkAddress href="https://meta.stackoverflow.com/questions/285551/why-should-i-not-upload-images-of-code-data-errors">
-                not as images
-              </LinkAddress>
-              ), and{' '}
-              <LinkAddress href="https://stackoverflow.com/help/formatting">
-                format them appropriately.
+              <LinkAddress href="https://stackoverflow.com/help/tagging">
+                Learn more about tagging
               </LinkAddress>
             </DescribeBottomContent>
           </div>
         </DescribeBottom>
-      </DescribeContainer4> */}
+      </DescribeContainer4>
     </QuestionContainer>
   );
 }

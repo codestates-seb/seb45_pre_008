@@ -14,10 +14,10 @@ import {
   DescribeBottomContent,
   LinkAddress,
   WritingLogo,
-} from './../assets/styles/QuestionStyle.jsx';
+} from '../assets/styles/QuestionStyle.jsx';
 import Writing from './../assets/images/writing-logo.svg';
-import Draft from './Draft.jsx';
-import Tag from './Tag.jsx';
+import Draft from '../components/Draft.jsx';
+import Tag from '../components/Tag.jsx';
 
 const MainBox = styled.main`
   padding: 0px 24px 24px;

@@ -1,5 +1,5 @@
 import './App.css';
-import Question from './components/Question.jsx';
+import Question from './pages/Question.jsx';
 import { Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer.jsx';
 import Header from './components/Header.jsx';
