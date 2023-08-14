@@ -6,6 +6,7 @@ import {
   QuestionBoxTitle,
   QuestionBoxSubTitle,
   NextButton,
+  InvalidNextButton,
   DescribeContainer1,
   DescribeTop,
   DescribeBottom,
@@ -108,16 +109,31 @@ export default function Tag() {
               </TagItem>
             );
           })}
-          <TagInput
-            className="tag-input"
-            type="text"
-            placeholder="e.g. (c flutter django)"
-            onChange={(e) => setTagItem(e.target.value)}
-            value={tagItem}
-            onKeyPress={onKeyPress}
-          />
+          {tagList.length >= 5 ? (
+            <TagInput
+              className="tag-input"
+              type="text"
+              onChange={(e) => setTagItem(e.target.value)}
+              value={tagItem}
+              onKeyPress={onKeyPress}
+              disabled
+            />
+          ) : (
+            <TagInput
+              className="tag-input"
+              type="text"
+              placeholder="e.g. (c flutter django)"
+              onChange={(e) => setTagItem(e.target.value)}
+              value={tagItem}
+              onKeyPress={onKeyPress}
+            />
+          )}
         </TagBox>
-        <NextButton>Next</NextButton>
+        {tagList.length >= 1 ? (
+          <NextButton disabled>Next</NextButton>
+        ) : (
+          <InvalidNextButton>Next</InvalidNextButton>
+        )}
       </TagBoxContainer>
       <DescribeContainer4>
         <DescribeTop>Adding tags</DescribeTop>
