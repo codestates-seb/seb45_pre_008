@@ -1,5 +1,6 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import styled from 'styled-components';
+import images from '../assets/images/index.js';
 
 const OAuthButtons = styled.div`
   margin-top: 20px;
@@ -25,15 +26,28 @@ const OAuthButton = styled.button`
   }
 `;
 
+const OAuthButtonImg = styled.img`
+  position: relative;
+  left: -5px;
+  top: 2px;
+`;
+
 export default function OauthButton() {
   return (
     <>
       <OAuthButtons>
         <OAuthButton bgColor="#ffffff" textColor="#000000">
+          <OAuthButtonImg src={images.google} alt="" />
           Login with Google
         </OAuthButton>
-        <OAuthButton bgColor="#24292e">Login with GitHub</OAuthButton>
-        <OAuthButton bgColor="#314a86">Login with Facebook</OAuthButton>
+        <OAuthButton bgColor="#24292e">
+          <OAuthButtonImg src={images.github} alt="" />
+          Login with GitHub
+        </OAuthButton>
+        <OAuthButton bgColor="#314a86">
+          <OAuthButtonImg src={images.facebook} alt="" />
+          Login with Facebook
+        </OAuthButton>
       </OAuthButtons>
     </>
   );

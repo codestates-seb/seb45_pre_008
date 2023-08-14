@@ -2,6 +2,8 @@ import React from 'react'; // eslint-disable-line no-unused-vars
 import stackoverflow from '../assets/images/stackoverflow.svg';
 import styled from 'styled-components';
 import OauthButton from '../components/OauthButton.jsx';
+import { useDispatch } from 'react-redux';
+import { loginActions } from '../store/login.js';
 
 const LoginPage = styled.div`
   display: flex;
@@ -19,7 +21,7 @@ const Logo = styled.img`
 `;
 
 const LoginForm = styled.form`
-  width: 300px;
+  width: 335px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -35,7 +37,7 @@ const FormLabel = styled.label`
 `;
 
 const FormInput = styled.input`
-  width: 95%;
+  width: 100%;
   padding: 8px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
@@ -75,6 +77,12 @@ const Extend = styled.p`
 `;
 
 export default function Login() {
+  const dispatch = useDispatch();
+  const loginHandler = (e) => {
+    e.preventDefault();
+    dispatch(loginActions.login());
+  };
+
   return (
     <>
       <LoginPage>
@@ -88,7 +96,9 @@ export default function Login() {
             <ForgotPasswordButton>Forgot Password?</ForgotPasswordButton>
           </FormField>
           <FormInput type="password" id="password" placeholder="Password" />
-          <SubmitButton type="submit">Login</SubmitButton>
+          <SubmitButton type="submit" onClick={loginHandler}>
+            Login
+          </SubmitButton>
         </LoginForm>
         <Extend>Don &lsquo;t have an account? Sign up</Extend>
         <Extend>Are you an employer? Sign up on Talent</Extend>
