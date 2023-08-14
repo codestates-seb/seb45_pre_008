@@ -1,7 +1,23 @@
-import styled from 'styled-components';
-import Draft from './Draft.jsx';
-import Writing from './../assets/images/writing-logo.svg';
 import { useState } from 'react';
+import styled from 'styled-components';
+import {
+  QuestionContainer,
+  QuestionBox,
+  QuestionBoxTitle,
+  QuestionBoxSubTitle,
+  QuestionContent,
+  NextButton,
+  InvalidNextButton,
+  DescribeContainer1,
+  DescribeTop,
+  DescribeBottom,
+  DescribeBottomContent,
+  LinkAddress,
+  WritingLogo,
+} from './../assets/styles/QuestionStyle.jsx';
+import Writing from './../assets/images/writing-logo.svg';
+import Draft from './Draft.jsx';
+import Tag from './Tag.jsx';
 
 const MainBox = styled.main`
   padding: 0px 24px 24px;
@@ -47,164 +63,17 @@ const StepsList = styled.li`
   font-weight: 400;
   color: #3b4045;
 `;
-const LinkAddress = styled.a`
-  color: rgb(0, 116, 204) !important;
-  margin: 0px 4px 0px 4px;
-  cursor: pointer;
-  &:hover {
-    color: rgb(53, 141, 250);
-  }
-`;
-const QuestionContainer = styled.div`
-  display: flex;
-  margin: 16px 0px 0px 0px;
-  gap: 14px;
-`;
-const QuestionBox = styled.div`
-  padding: 24px;
-  background-color: #ffffff;
-  border: 1px solid rgb(228, 230, 232);
-  border-radius: 8px;
-  width: 70%;
-  max-width: 800px;
-`;
-const TagBoxContainer = styled(QuestionBox)`
-  margin: 16px 0px 0px 0px;
-`;
-const QuestionBoxTitle = styled.div`
-  font-size: 15px;
-  font-weight: 600;
-`;
-const QuestionBoxSubTitle = styled.div`
-  font-size: 12px;
-  font-weight: 400;
-`;
-const QuestionContent = styled.input`
-  font-size: 12px;
-  font-weight: 400;
-  padding: 7.8px 9.1px;
-  margin: 10px 0px 0px 0px;
-  width: 97%;
-  border: 1px solid rgb(186, 191, 196);
-  ::placeholder {
-    color: rgb(202, 206, 209);
-  }
-  &:focus {
-    border-color: rgb(104, 167, 221);
-    outline: none;
-    box-shadow: 0 0 3px 3px rgb(225, 236, 248);
-  }
-  border-radius: 8px;
-`;
-const NextButton = styled.button`
-  padding: 10.4px;
-  margin: 8px 0 0;
-  font-size: 13px;
-  font-weight: 600;
-  color: #ffffff;
-  background-color: rgb(11, 149, 255);
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  &:hover {
-    background-color: rgb(36, 105, 194);
-  }
-`;
-const InvalidNextButton = styled.button`
-  padding: 10.4px;
-  margin: 8px 0 0;
-  font-size: 13px;
-  font-weight: 600;
-  color: #ffffff;
-  background-color: rgb(151, 197, 252);
-  border: none;
-  border-radius: 6px;
-`;
-const DescribeContainer1 = styled.div`
-  width: 350px;
-  height: 180px;
-  background-color: #ffffff;
-  border: 1px solid rgb(214, 217, 220);
-  border-radius: 6px;
-`;
 const DescribeContainer2 = styled(DescribeContainer1)`
   height: 150px;
 `;
 const DescribeContainer3 = styled(DescribeContainer1)`
   height: 300px;
 `;
-const DescribeTop = styled.div`
-  padding: 12px;
-  font-size: 15px;
-  background-color: rgb(248, 249, 249);
-  border-bottom: 1px solid rgb(214, 217, 220);
-`;
-const DescribeBottom = styled.div`
-  margin: 16px;
-  background-color: #ffffff;
-  display: flex;
-`;
-const DescribeBottomContent = styled.p`
-  margin: 0 0 16px 16px;
-  font-size: 12px;
-`;
-const WritingLogo = styled.img`
-  width: 48px;
-  height: 48px;
-`;
-const TagBox = styled.div`
-  display: flex;
-  gap: 4px;
-  align-items: center;
-  flex-wrap: wrap;
-  margin: 10px 0 0 0;
-  padding: 7.8px 9.1px;
-  border: 1px solid rgb(186, 191, 196);
-  border-radius: 8px;
-  ::placeholder {
-    color: rgb(202, 206, 209);
-  }
-  &:focus-within {
-    border-color: rgb(104, 167, 221);
-    outline: none;
-    box-shadow: 0 0 3px 3px rgb(225, 236, 248);
-  }
-`;
-const TagItem = styled.div`
-  display: flex;
-  gap: 4px;
-  padding: 5px;
-  background-color: rgb(225, 236, 244);
-  border-radius: 5px;
-  color: rgb(57, 115, 156);
-  font-size: 12px;
-`;
-const DeleteButton = styled.button`
-  all: unset;
-  width: 14px;
-  height: 14px;
-  text-align: center;
-  color: rgb(57, 115, 157);
-  border-radius: 2px;
-  &:hover {
-    background-color: rgb(57, 115, 157);
-    color: rgb(225, 236, 244);
-    width: 14px;
-    height: 14px;
-  }
-`;
-const TagInput = styled.input`
-  border: none;
-  outline: none;
-  cursor: text;
-`;
 
 export default function Question() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [subContent, setSubContent] = useState('');
-  const [tagItem, setTagItem] = useState('');
-  const [tagList, setTagList] = useState([]);
 
   const handleChangeTitle = (e) => {
     setTitle(e.target.value);
@@ -214,24 +83,6 @@ export default function Question() {
   };
   const handleChangeSubContent = (e) => {
     setSubContent(e.target.value);
-  };
-  const onKeyPress = (e) => {
-    if (e.target.value.length !== 0 && e.key === 'Enter') {
-      submitTagItem();
-    }
-  };
-  const submitTagItem = () => {
-    const updatedTagList = [...tagList];
-    updatedTagList.push(tagItem);
-    setTagList(updatedTagList);
-    setTagItem('');
-  };
-  const deleteTagItem = (e) => {
-    const deleteTagItem = e.target.parentElement.firstChild.innerText;
-    const filteredTagList = tagList.filter(
-      (tagItem) => tagItem !== deleteTagItem,
-    );
-    setTagList(filteredTagList);
   };
 
   const isTitleValid = title.length >= 15;
@@ -394,31 +245,7 @@ export default function Question() {
           </DescribeBottom>
         </DescribeContainer3>
       </QuestionContainer>
-      <TagBoxContainer>
-        <QuestionBoxTitle>Tags</QuestionBoxTitle>
-        <QuestionBoxSubTitle>
-          Add up to 5 tags to describe what your question is about. Start typing
-          to see suggestions.
-        </QuestionBoxSubTitle>
-        <TagBox>
-          {tagList.map((tagItem, index) => {
-            return (
-              <TagItem key={index}>
-                <span>{tagItem}</span>
-                <DeleteButton onClick={deleteTagItem}>X</DeleteButton>
-              </TagItem>
-            );
-          })}
-          <TagInput
-            type="text"
-            placeholder="e.g. (c flutter django)"
-            onChange={(e) => setTagItem(e.target.value)}
-            value={tagItem}
-            onKeyPress={onKeyPress}
-          />
-        </TagBox>
-        <NextButton>Next</NextButton>
-      </TagBoxContainer>
+      <Tag />
     </MainBox>
   );
 }
