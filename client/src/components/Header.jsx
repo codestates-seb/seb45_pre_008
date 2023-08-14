@@ -1,11 +1,14 @@
 import styled from 'styled-components';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ReactComponent as HeaderLogo } from '../assets/images/header-logo.svg';
+import { Button } from './Button.jsx';
+import Search from './Search.jsx';
 
 const HeaderComponent = styled.header`
   width: 100%;
   position: sticky;
-  z-index: 10;
+  top: 0;
+  z-index: 1000;
   height: 56px;
   border-top: 3px solid hsl(27, 90%, 55%);
   background-color: hsl(0, 0%, 100%);
@@ -60,34 +63,11 @@ const NavigationList = styled.ul`
   }
 `;
 
-const SearchbarContainer = styled.div`
-  position: relative;
-  flex-grow: 1;
-  margin: 0;
-`;
-
-const SearchboxInput = styled.input`
-  width: 100%;
-  padding: 7.8px 9.1px 7.8px 32px;
-  display: block;
-  line-height: calc((13 + 2) / 13);
-`;
-
 const ButtonContainer = styled.div`
   display: flex;
 `;
 
-const ActionButton = styled.button`
-  padding: 8px 10px;
-`;
-
 const Header = () => {
-  const navigate = useNavigate();
-
-  const handleNavigation = (path) => () => {
-    navigate(path);
-  };
-
   return (
     <HeaderComponent>
       <HeaderContainer>
@@ -99,20 +79,18 @@ const Header = () => {
           <li>Products</li>
           <li>For Teams</li>
         </NavigationList>
-        <SearchbarContainer>
-          <SearchboxInput
-            className="searchbox"
-            type="text"
-            placeholder="Search..."
-          />
-        </SearchbarContainer>
+        <Search />
         <ButtonContainer>
-          <ActionButton onClick={handleNavigation('/login')}>
-            Log in
-          </ActionButton>
-          <ActionButton onClick={handleNavigation('/signup')}>
-            Sign up
-          </ActionButton>
+          <Button
+            color={'#39739D'}
+            backColor={'#E1ECF4'}
+            hoverColor={'#B3D3EA'}
+          >
+            <Link to="/login">Log in</Link>
+          </Button>
+          <Button margin={'0 0 0 4px'}>
+            <Link to="/signup">Sign up</Link>
+          </Button>
         </ButtonContainer>
       </HeaderContainer>
     </HeaderComponent>
