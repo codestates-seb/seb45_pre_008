@@ -14,7 +14,7 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
     }
 
-    ul, ol, li{
+    ul:not(.steps-ul), ol, li:not(.steps-list){
         list-style-type: none;
         padding: 0;
         margin: 0;
