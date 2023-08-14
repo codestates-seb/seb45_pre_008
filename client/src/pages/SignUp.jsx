@@ -1,6 +1,6 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import styled from 'styled-components';
-import OauthButton from '../componets/OauthButton.jsx';
+import OauthButton from '../components/OauthButton.jsx';
 
 const SignUpContainer = styled.div`
   display: flex;
