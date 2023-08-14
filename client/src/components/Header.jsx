@@ -58,8 +58,13 @@ const NavigationList = styled.ul`
   font-size: 13px;
 
   li {
+    cursor: pointer;
+    border-radius: 1000px;
     padding: 6px 12px;
     margin: 2px;
+    &:hover {
+      background-color: hsl(210, 8%, 90%);
+    }
   }
 `;
 
