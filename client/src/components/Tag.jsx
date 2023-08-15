@@ -72,6 +72,7 @@ const DescribeContainer4 = styled(DescribeContainer1)`
 export default function Tag() {
   const [tagItem, setTagItem] = useState('');
   const [tagList, setTagList] = useState([]);
+  const [isFocused, setIsFocused] = useState(false);
 
   const onKeyPress = (e) => {
     if (e.target.value.length !== 0 && e.key === 'Enter') {
@@ -91,7 +92,9 @@ export default function Tag() {
     );
     setTagList(filteredTagList);
   };
-
+  const handleFocus = (focused) => {
+    setIsFocused(focused);
+  };
   return (
     <QuestionContainer>
       <TagBoxContainer>
@@ -100,7 +103,10 @@ export default function Tag() {
           Add up to 5 tags to describe what your question is about. Start typing
           to see suggestions.
         </QuestionBoxSubTitle>
-        <TagBox>
+        <TagBox
+          onFocus={() => handleFocus(true)}
+          onBlur={() => handleFocus(false)}
+        >
           {tagList.map((tagItem, index) => {
             return (
               <TagItem key={index}>
@@ -135,28 +141,30 @@ export default function Tag() {
           <InvalidNextButton>Next</InvalidNextButton>
         )}
       </TagBoxContainer>
-      <DescribeContainer4>
-        <DescribeTop>Adding tags</DescribeTop>
-        <DescribeBottom>
-          <WritingLogo src={Writing} />
-          <div>
-            <DescribeBottomContent>
-              Tags help ensure that your question will get attention from the
-              right people.
-            </DescribeBottomContent>
-            <DescribeBottomContent>
-              Tag things in more than one way so people can find them more
-              easily. Add tags for product lines, projects, teams, and the
-              specific technologies or languages used.
-            </DescribeBottomContent>
-            <DescribeBottomContent>
-              <LinkAddress href="https://stackoverflow.com/help/tagging">
-                Learn more about tagging
-              </LinkAddress>
-            </DescribeBottomContent>
-          </div>
-        </DescribeBottom>
-      </DescribeContainer4>
+      {isFocused && (
+        <DescribeContainer4>
+          <DescribeTop>Adding tags</DescribeTop>
+          <DescribeBottom>
+            <WritingLogo src={Writing} />
+            <div>
+              <DescribeBottomContent>
+                Tags help ensure that your question will get attention from the
+                right people.
+              </DescribeBottomContent>
+              <DescribeBottomContent>
+                Tag things in more than one way so people can find them more
+                easily. Add tags for product lines, projects, teams, and the
+                specific technologies or languages used.
+              </DescribeBottomContent>
+              <DescribeBottomContent>
+                <LinkAddress href="https://stackoverflow.com/help/tagging">
+                  Learn more about tagging
+                </LinkAddress>
+              </DescribeBottomContent>
+            </div>
+          </DescribeBottom>
+        </DescribeContainer4>
+      )}
     </QuestionContainer>
   );
 }

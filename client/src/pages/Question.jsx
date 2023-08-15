@@ -74,6 +74,11 @@ export default function Question() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [subContent, setSubContent] = useState('');
+  const [isFocused, setIsFocused] = useState({
+    selec1: false,
+    selec2: false,
+    selec3: false,
+  });
 
   const handleChangeTitle = (e) => {
     setTitle(e.target.value);
@@ -83,6 +88,9 @@ export default function Question() {
   };
   const handleChangeSubContent = (e) => {
     setSubContent(e.target.value);
+  };
+  const handleFocus = (value, key) => {
+    setIsFocused({ ...isFocused, [key]: value });
   };
 
   const isTitleValid = title.length >= 15;
@@ -132,7 +140,10 @@ export default function Question() {
           </StepsList>
         </StepsUl>
       </InformBox>
-      <QuestionContainer>
+      <QuestionContainer
+        onFocus={() => handleFocus(true, 'selec1')}
+        onBlur={() => handleFocus(false, 'selec1')}
+      >
         <QuestionBox>
           <QuestionBoxTitle>Title</QuestionBoxTitle>
           <QuestionBoxSubTitle>
@@ -149,24 +160,29 @@ export default function Question() {
             <InvalidNextButton>Next</InvalidNextButton>
           )}
         </QuestionBox>
-        <DescribeContainer1>
-          <DescribeTop>Wirting a good title</DescribeTop>
-          <DescribeBottom>
-            <WritingLogo src={Writing} />
-            <div>
-              <DescribeBottomContent>
-                your title should summarize the problem.
-              </DescribeBottomContent>
-              <DescribeBottomContent>
-                You might find that you have a better idea of your title after
-                writing out the rest of the question.
-              </DescribeBottomContent>
-            </div>
-          </DescribeBottom>
-        </DescribeContainer1>
+        {isFocused.selec1 && (
+          <DescribeContainer1>
+            <DescribeTop>Wirting a good title</DescribeTop>
+            <DescribeBottom>
+              <WritingLogo src={Writing} />
+              <div>
+                <DescribeBottomContent>
+                  your title should summarize the problem.
+                </DescribeBottomContent>
+                <DescribeBottomContent>
+                  You might find that you have a better idea of your title after
+                  writing out the rest of the question.
+                </DescribeBottomContent>
+              </div>
+            </DescribeBottom>
+          </DescribeContainer1>
+        )}
       </QuestionContainer>
       <QuestionContainer>
-        <QuestionBox>
+        <QuestionBox
+          onFocus={() => handleFocus(true, 'selec2')}
+          onBlur={() => handleFocus(false, 'selec2')}
+        >
           <QuestionBoxTitle>
             What are the details of your problem?
           </QuestionBoxTitle>
@@ -174,31 +190,32 @@ export default function Question() {
             Introduce the problem and expand on what you put in the title.
             Minimum 20 characters.
           </QuestionBoxSubTitle>
-          <Draft
-            value={content}
-            onChange={handleChangeContent}
-            minlength={20}
-          />
+          <Draft value={content} onChange={handleChangeContent} />
           {isContentValid ? (
             <NextButton disabled={!isContentValid}>Next</NextButton>
           ) : (
             <InvalidNextButton>Next</InvalidNextButton>
           )}
         </QuestionBox>
-        <DescribeContainer2>
-          <DescribeTop>Introduce the problem</DescribeTop>
-          <DescribeBottom>
-            <WritingLogo src={Writing} />
-            <DescribeBottomContent>
-              Explain how you encountered the problem you’re trying to solve,
-              and any difficulties that have prevented you from solving it
-              yourself.
-            </DescribeBottomContent>
-          </DescribeBottom>
-        </DescribeContainer2>
+        {isFocused.selec2 && (
+          <DescribeContainer2>
+            <DescribeTop>Introduce the problem</DescribeTop>
+            <DescribeBottom>
+              <WritingLogo src={Writing} />
+              <DescribeBottomContent>
+                Explain how you encountered the problem you’re trying to solve,
+                and any difficulties that have prevented you from solving it
+                yourself.
+              </DescribeBottomContent>
+            </DescribeBottom>
+          </DescribeContainer2>
+        )}
       </QuestionContainer>
       <QuestionContainer>
-        <QuestionBox>
+        <QuestionBox
+          onFocus={() => handleFocus(true, 'selec3')}
+          onBlur={() => handleFocus(false, 'selec3')}
+        >
           <QuestionBoxTitle>
             What did you try and what were you expecting?
           </QuestionBoxTitle>
@@ -213,39 +230,42 @@ export default function Question() {
             <InvalidNextButton>Next</InvalidNextButton>
           )}
         </QuestionBox>
-        <DescribeContainer3>
-          <DescribeTop>Expand on the problem</DescribeTop>
-          <DescribeBottom>
-            <WritingLogo src={Writing} />
-            <div>
-              <DescribeBottomContent>
-                Show what you’ve tried, tell us what happened, and why it didn’t
-                meet your needs.
-              </DescribeBottomContent>
-              <DescribeBottomContent>
-                Not all questions benefit from including code, but if your
-                problem is better understood with code you’ve written, you
-                should include a
-                <LinkAddress href="https://stackoverflow.com/help/minimal-reproducible-example">
-                  minimal, reproducible example.
-                </LinkAddress>
-              </DescribeBottomContent>
-              <DescribeBottomContent>
-                Please make sure to post code and errors as text directly to the
-                question (and{' '}
-                <LinkAddress href="https://meta.stackoverflow.com/questions/285551/why-should-i-not-upload-images-of-code-data-errors">
-                  not as images
-                </LinkAddress>
-                ), and{' '}
-                <LinkAddress href="https://stackoverflow.com/help/formatting">
-                  format them appropriately.
-                </LinkAddress>
-              </DescribeBottomContent>
-            </div>
-          </DescribeBottom>
-        </DescribeContainer3>
+        {isFocused.selec3 && (
+          <DescribeContainer3>
+            <DescribeTop>Expand on the problem</DescribeTop>
+            <DescribeBottom>
+              <WritingLogo src={Writing} />
+              <div>
+                <DescribeBottomContent>
+                  Show what you’ve tried, tell us what happened, and why it
+                  didn’t meet your needs.
+                </DescribeBottomContent>
+                <DescribeBottomContent>
+                  Not all questions benefit from including code, but if your
+                  problem is better understood with code you’ve written, you
+                  should include a
+                  <LinkAddress href="https://stackoverflow.com/help/minimal-reproducible-example">
+                    minimal, reproducible example.
+                  </LinkAddress>
+                </DescribeBottomContent>
+                <DescribeBottomContent>
+                  Please make sure to post code and errors as text directly to
+                  the question (and{' '}
+                  <LinkAddress href="https://meta.stackoverflow.com/questions/285551/why-should-i-not-upload-images-of-code-data-errors">
+                    not as images
+                  </LinkAddress>
+                  ), and{' '}
+                  <LinkAddress href="https://stackoverflow.com/help/formatting">
+                    format them appropriately.
+                  </LinkAddress>
+                </DescribeBottomContent>
+              </div>
+            </DescribeBottom>
+          </DescribeContainer3>
+        )}
       </QuestionContainer>
       <Tag />
+      <NextButton>Post your question</NextButton>
     </MainBox>
   );
 }
