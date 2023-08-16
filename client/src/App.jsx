@@ -4,9 +4,13 @@ import { Route, Routes } from 'react-router-dom';
 // import Footer from './components/Footer.jsx';
 import Header from './components/Header.jsx';
 import Login from './pages/Login.jsx';
+<<<<<<< HEAD
+import SignUp from './pages/SignUp.jsx';
+=======
 import QuestionList from './pages/QuestionList.jsx';
 import SignUp from './pages/SignUp.jsx';
 import Main from './pages/Main.jsx';
+>>>>>>> 22f864d600064571c0cff90c977442d1ee06fac5
 
 
 function App() {
