@@ -5,7 +5,6 @@ const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
     }
 
-
     html,
     body {
         width: 100%;
@@ -14,7 +13,11 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
     }
 
-    ul:not(.steps-ul), ol, li:not(.steps-list){
+    body {
+        padding-top: 56px;
+    }
+
+    ul, ol, li{
         list-style-type: none;
         padding: 0;
         margin: 0;
@@ -27,7 +30,6 @@ const GlobalStyle = createGlobalStyle`
 
     a:hover, a:active, a:visited {
         text-decoration: none; 
-        color: inherit;
     }
 
     input:not(.tag-input) {
