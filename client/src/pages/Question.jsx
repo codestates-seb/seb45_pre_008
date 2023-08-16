@@ -6,7 +6,7 @@ import {
   QuestionBoxTitle,
   QuestionBoxSubTitle,
   QuestionContent,
-  NextButton,
+  Button,
   InvalidNextButton,
   DescribeContainer1,
   DescribeTop,
@@ -18,9 +18,10 @@ import {
 import Writing from './../assets/images/writing-logo.svg';
 import Draft from '../components/Draft.jsx';
 import Tag from '../components/Tag.jsx';
+import DiscardDraft from '../components/DiscardDraft.jsx';
 
 const MainBox = styled.main`
-  padding: 0px 24px 24px;
+  padding: 0 24px 24px;
   background-color: #f8f9f9;
 `;
 const MainTitle = styled.h1`
@@ -79,6 +80,7 @@ export default function Question() {
     selec2: false,
     selec3: false,
   });
+  // const [isButtonVisible, setIsButtonVisible] = useState(true);
 
   const handleChangeTitle = (e) => {
     setTitle(e.target.value);
@@ -92,6 +94,9 @@ export default function Question() {
   const handleFocus = (value, key) => {
     setIsFocused({ ...isFocused, [key]: value });
   };
+  // const handleButtonClick = () => {
+  //   setIsButtonVisible(false);
+  // };
 
   const isTitleValid = title.length >= 15;
   const isContentValid = content.length >= 20;
@@ -155,7 +160,7 @@ export default function Question() {
             onChange={handleChangeTitle}
           ></QuestionContent>
           {isTitleValid ? (
-            <NextButton disabled={!isTitleValid}>Next</NextButton>
+            <Button disabled={!isTitleValid}>Next</Button>
           ) : (
             <InvalidNextButton>Next</InvalidNextButton>
           )}
@@ -192,7 +197,7 @@ export default function Question() {
           </QuestionBoxSubTitle>
           <Draft value={content} onChange={handleChangeContent} />
           {isContentValid ? (
-            <NextButton disabled={!isContentValid}>Next</NextButton>
+            <Button disabled={!isContentValid}>Next</Button>
           ) : (
             <InvalidNextButton>Next</InvalidNextButton>
           )}
@@ -225,7 +230,7 @@ export default function Question() {
           </QuestionBoxSubTitle>
           <Draft value={subContent} onChange={handleChangeSubContent} />
           {isSubContentValid ? (
-            <NextButton disabled={!isSubContentValid}>Next</NextButton>
+            <Button disabled={!isSubContentValid}>Next</Button>
           ) : (
             <InvalidNextButton>Next</InvalidNextButton>
           )}
@@ -265,7 +270,8 @@ export default function Question() {
         )}
       </QuestionContainer>
       <Tag />
-      <NextButton>Post your question</NextButton>
+      <Button>Post your question</Button>
+      <DiscardDraft />
     </MainBox>
   );
 }

@@ -5,7 +5,7 @@ import {
   QuestionBox,
   QuestionBoxTitle,
   QuestionBoxSubTitle,
-  NextButton,
+  Button,
   InvalidNextButton,
   DescribeContainer1,
   DescribeTop,
@@ -136,7 +136,7 @@ export default function Tag() {
           )}
         </TagBox>
         {tagList.length >= 1 ? (
-          <NextButton disabled>Next</NextButton>
+          <Button disabled>Next</Button>
         ) : (
           <InvalidNextButton>Next</InvalidNextButton>
         )}

@@ -46,7 +46,7 @@ export const QuestionContent = styled.input`
   }
   border-radius: 8px;
 `;
-export const NextButton = styled.button`
+export const Button = styled.button`
   padding: 10.4px;
   margin: 8px 0 0;
   font-size: 13px;
@@ -59,6 +59,7 @@ export const NextButton = styled.button`
   &:hover {
     background-color: rgb(36, 105, 194);
   }
+  /* display: ${(props) => (props.isVisible ? 'block' : 'none')}; */
 `;
 export const InvalidNextButton = styled.button`
   padding: 10.4px;
