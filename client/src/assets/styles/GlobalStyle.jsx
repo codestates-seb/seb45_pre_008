@@ -32,7 +32,7 @@ const GlobalStyle = createGlobalStyle`
         text-decoration: none; 
     }
 
-    input {
+    input:not(.tag-input) {
         padding: 7.8px 9.1px;
         width: 97%;
         border: 1px solid rgb(186, 191, 196);

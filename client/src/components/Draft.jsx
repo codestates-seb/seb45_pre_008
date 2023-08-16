@@ -22,7 +22,7 @@ const Draft = () => {
           editorState={editorState}
           onEditorStateChange={updateTextDescription}
           editorStyle={{
-            height: '200px',
+            height: '130px',
             width: '100%',
             border: '1px solid lightgray',
           }}
