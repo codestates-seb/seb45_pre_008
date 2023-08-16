@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Draft from './Draft.jsx';
+import Draft from '../components/Draft.jsx';
 import Writing from './../assets/images/writing-logo.svg';
 import { useState } from 'react';
 
