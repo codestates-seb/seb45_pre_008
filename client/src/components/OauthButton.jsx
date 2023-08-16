@@ -29,7 +29,7 @@ const OAuthButton = styled.button`
 const OAuthButtonImg = styled.img`
   position: relative;
   left: -5px;
-  top: 2px;
+  top: 3px;
 `;
 
 export default function OauthButton() {

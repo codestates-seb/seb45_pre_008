@@ -13,6 +13,7 @@ const SignUpContainer = styled.div`
 const SignUpExplain = styled.div`
   display: flex;
   flex-direction: column;
+  width: 550px;
 `;
 
 const SignUpExplainText = styled.div`
@@ -38,7 +39,7 @@ const SignUpPage = styled.div`
 `;
 
 const SignUpForm = styled.form`
-  width: 300px;
+  width: 335px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;

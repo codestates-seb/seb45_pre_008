@@ -22,6 +22,7 @@ const Logo = styled.img`
 
 const LoginForm = styled.form`
   width: 335px;
+  height: 225px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
