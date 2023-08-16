@@ -6,8 +6,9 @@ import Search from './Search.jsx';
 
 const HeaderComponent = styled.header`
   width: 100%;
-  position: sticky;
-  top: 0;
+  position: fixed;
+  /* top: 0; */
+  margin-top: -56px;
   z-index: 1000;
   height: 56px;
   border-top: 3px solid hsl(27, 90%, 55%);
