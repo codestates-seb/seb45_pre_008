@@ -6,8 +6,9 @@ import Search from './Search.jsx';
 
 const HeaderComponent = styled.header`
   width: 100%;
-  position: sticky;
-  top: 0;
+  position: fixed;
+  /* top: 0; */
+  margin-top: -56px;
   z-index: 1000;
   height: 56px;
   border-top: 3px solid hsl(27, 90%, 55%);
@@ -58,8 +59,13 @@ const NavigationList = styled.ul`
   font-size: 13px;
 
   li {
+    cursor: pointer;
+    border-radius: 1000px;
     padding: 6px 12px;
     margin: 2px;
+    &:hover {
+      background-color: hsl(210, 8%, 90%);
+    }
   }
 `;
 
