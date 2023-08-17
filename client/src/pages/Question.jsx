@@ -97,6 +97,9 @@ export default function Question() {
   // const handleButtonClick = () => {
   //   setIsButtonVisible(false);
   // };
+  const resetForm = () => {
+    setTitle('');
+  };
 
   const isTitleValid = title.length >= 15;
   const isContentValid = content.length >= 20;
@@ -196,11 +199,7 @@ export default function Question() {
             Minimum 20 characters.
           </QuestionBoxSubTitle>
           <Draft value={content} onChange={handleChangeContent} />
-          {isContentValid ? (
-            <Button disabled={!isContentValid}>Next</Button>
-          ) : (
-            <InvalidNextButton>Next</InvalidNextButton>
-          )}
+          <Button disabled={!isContentValid}>Next</Button>
         </QuestionBox>
         {isFocused.selec2 && (
           <DescribeContainer2>
@@ -229,11 +228,7 @@ export default function Question() {
             actually resulted. Minimum 20 characters.
           </QuestionBoxSubTitle>
           <Draft value={subContent} onChange={handleChangeSubContent} />
-          {isSubContentValid ? (
-            <Button disabled={!isSubContentValid}>Next</Button>
-          ) : (
-            <InvalidNextButton>Next</InvalidNextButton>
-          )}
+          <Button disabled={!isSubContentValid}>Next</Button>
         </QuestionBox>
         {isFocused.selec3 && (
           <DescribeContainer3>
@@ -271,7 +266,7 @@ export default function Question() {
       </QuestionContainer>
       <Tag />
       <Button>Post your question</Button>
-      <DiscardDraft />
+      <DiscardDraft resetForm={resetForm} />
     </MainBox>
   );
 }

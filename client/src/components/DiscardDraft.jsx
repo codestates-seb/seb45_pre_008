@@ -16,7 +16,7 @@ const DiscardDraftButton = styled(Button)`
     background-color: rgb(249, 211, 211);
   }
 `;
-const AskButton = styled(Button)`
+const DeleteButton = styled(Button)`
   background-color: #d0393e;
   margin-right: 10px;
   &:hover {
@@ -66,7 +66,7 @@ const ModalContent = styled.div`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 `;
 
-export default function DiscardDraft() {
+export default function DiscardDraft({ resetForm }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -79,6 +79,10 @@ export default function DiscardDraft() {
     if (e.target === e.currentTarget) {
       closeModal();
     }
+  };
+  const handleDiscard = () => {
+    resetForm();
+    closeModal();
   };
   return (
     <>
@@ -94,7 +98,9 @@ export default function DiscardDraft() {
               Are you sure you want to discard this question? This cannot be
               undone.
             </p>
-            <AskButton>Discard question</AskButton>
+            <DeleteButton onClick={handleDiscard}>
+              Discard question
+            </DeleteButton>
             <CancelButton onClick={closeModal}>Cancel</CancelButton>
           </ModalContent>
         </ModalOverlay>
