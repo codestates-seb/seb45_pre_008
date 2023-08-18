@@ -59,7 +59,9 @@ export const Button = styled.button`
   &:hover {
     background-color: rgb(36, 105, 194);
   }
-  /* display: ${(props) => (props.isVisible ? 'block' : 'none')}; */
+`;
+export const NextButton = styled(Button)`
+  display: ${(props) => (props.isHidden ? 'none' : 'block')};
 `;
 export const InvalidNextButton = styled.button`
   padding: 10.4px;

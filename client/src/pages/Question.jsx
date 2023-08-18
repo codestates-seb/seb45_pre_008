@@ -7,6 +7,7 @@ import {
   QuestionBoxSubTitle,
   QuestionContent,
   Button,
+  NextButton,
   InvalidNextButton,
   DescribeContainer1,
   DescribeTop,
@@ -75,28 +76,42 @@ export default function Question() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [subContent, setSubContent] = useState('');
+  const [tagList, setTagList] = useState([]);
   const [isFocused, setIsFocused] = useState({
     selec1: false,
     selec2: false,
     selec3: false,
   });
-  // const [isButtonVisible, setIsButtonVisible] = useState(true);
+  const [isButtonHidden, setIsButtonHidden] = useState({
+    button1: false,
+    button2: false,
+    button3: false,
+    button4: false,
+  });
 
   const handleChangeTitle = (e) => {
     setTitle(e.target.value);
   };
   const handleChangeContent = (e) => {
     setContent(e.target.value);
+    console.log('content :', e.target.value);
   };
   const handleChangeSubContent = (e) => {
     setSubContent(e.target.value);
+    console.log('subContent :', e.target.value);
   };
   const handleFocus = (value, key) => {
     setIsFocused({ ...isFocused, [key]: value });
   };
-  // const handleButtonClick = () => {
-  //   setIsButtonVisible(false);
-  // };
+  const resetForm = () => {
+    setTitle('');
+  };
+  const resetTagContent = () => {
+    setTagList([]);
+  };
+  const handleButtonClick = (value, key) => {
+    setIsButtonHidden({ ...isButtonHidden, [key]: value });
+  };
 
   const isTitleValid = title.length >= 15;
   const isContentValid = content.length >= 20;
@@ -160,7 +175,13 @@ export default function Question() {
             onChange={handleChangeTitle}
           ></QuestionContent>
           {isTitleValid ? (
-            <Button disabled={!isTitleValid}>Next</Button>
+            <NextButton
+              isHidden={isButtonHidden.button1}
+              onClick={() => handleButtonClick(true, 'button1')}
+              disabled={!isTitleValid}
+            >
+              Next
+            </NextButton>
           ) : (
             <InvalidNextButton>Next</InvalidNextButton>
           )}
@@ -196,11 +217,13 @@ export default function Question() {
             Minimum 20 characters.
           </QuestionBoxSubTitle>
           <Draft value={content} onChange={handleChangeContent} />
-          {isContentValid ? (
-            <Button disabled={!isContentValid}>Next</Button>
-          ) : (
-            <InvalidNextButton>Next</InvalidNextButton>
-          )}
+          <NextButton
+            isHidden={isButtonHidden.button2}
+            onClick={() => handleButtonClick(true, 'button2')}
+            disabled={!isContentValid}
+          >
+            Next
+          </NextButton>
         </QuestionBox>
         {isFocused.selec2 && (
           <DescribeContainer2>
@@ -229,11 +252,13 @@ export default function Question() {
             actually resulted. Minimum 20 characters.
           </QuestionBoxSubTitle>
           <Draft value={subContent} onChange={handleChangeSubContent} />
-          {isSubContentValid ? (
-            <Button disabled={!isSubContentValid}>Next</Button>
-          ) : (
-            <InvalidNextButton>Next</InvalidNextButton>
-          )}
+          <NextButton
+            isHidden={isButtonHidden.button3}
+            onClick={() => handleButtonClick(true, 'button3')}
+            disabled={!isSubContentValid}
+          >
+            Next
+          </NextButton>
         </QuestionBox>
         {isFocused.selec3 && (
           <DescribeContainer3>
@@ -269,9 +294,14 @@ export default function Question() {
           </DescribeContainer3>
         )}
       </QuestionContainer>
-      <Tag />
+      <Tag
+        setIsButtonHidden={setIsButtonHidden}
+        handleButtonClick={handleButtonClick}
+        tagList={tagList}
+        setTagList={setTagList}
+      />
       <Button>Post your question</Button>
-      <DiscardDraft />
+      <DiscardDraft resetForm={resetForm} resetTagContent={resetTagContent} />
     </MainBox>
   );
 }
