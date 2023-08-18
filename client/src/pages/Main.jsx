@@ -24,6 +24,11 @@ const Content = styled.div`
   padding: 24px;
 `;
 
+const Mainbar = styled.div`
+  width: calc(100% - 300px - 24px);
+  float: left;
+`;
+
 const LeftAside = styled.aside`
   position: sticky;
   width: auto;
@@ -37,11 +42,12 @@ const LeftAside = styled.aside`
 `;
 
 const RightAside = styled.aside`
+  width: 300px;
+  float: right;
+  margin-left: 24px;
   height: 100%;
-  display: block;
 
   ul {
-    width: 300px;
     padding: 0;
     display: block;
     text-align: left;
@@ -90,7 +96,9 @@ const Main = () => {
           <Nav />
         </LeftAside>
         <Content>
-          <Outlet />
+          <Mainbar>
+            <Outlet />
+          </Mainbar>
           <RightAside>
             <ul>
               <li className="widget-header">The Overflow Blog</li>

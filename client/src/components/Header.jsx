@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom';
 import { ReactComponent as HeaderLogo } from '../assets/images/header-logo.svg';
 import { Button } from './Button.jsx';
 import Search from './Search.jsx';
+import { loginActions } from '../store/login';
+import { useDispatch, useSelector } from 'react-redux';
+import UserMenu from './UserMenu.jsx';
 
 const HeaderComponent = styled.header`
   width: 100%;
   position: fixed;
-  /* top: 0; */
   margin-top: -56px;
   z-index: 1000;
   height: 56px;
@@ -74,30 +76,56 @@ const ButtonContainer = styled.div`
 `;
 
 const Header = () => {
+  const isLogin = useSelector((state) => state.login.loginState);
+  const dispatch = useDispatch();
+
+  const handleLoginClick = () => {
+    dispatch(loginActions.login());
+  };
+
+  // 임시 로그아웃 버튼
+  // const handleLogoutClick = () => {
+  //   dispatch(loginActions.logout());
+  // };
+
   return (
     <HeaderComponent>
       <HeaderContainer>
         <LogoLink to="/">
           <LogoImage />
         </LogoLink>
-        <NavigationList>
-          <li>About</li>
-          <li>Products</li>
-          <li>For Teams</li>
-        </NavigationList>
+        {!isLogin ? (
+          <NavigationList>
+            <li>About</li>
+            <li>Products</li>
+            <li>For Teams</li>
+          </NavigationList>
+        ) : (
+          <NavigationList>
+            <li>Products</li>
+          </NavigationList>
+        )}
         <Search />
-        <ButtonContainer>
-          <Button
-            color={'#39739D'}
-            backColor={'#E1ECF4'}
-            hoverColor={'#B3D3EA'}
-          >
-            <Link to="/login">Log in</Link>
-          </Button>
-          <Button margin={'0 0 0 4px'}>
-            <Link to="/signup">Sign up</Link>
-          </Button>
-        </ButtonContainer>
+        {!isLogin ? (
+          <ButtonContainer>
+            <Button
+              color={'#39739D'}
+              backColor={'#E1ECF4'}
+              hoverColor={'#B3D3EA'}
+              onClick={handleLoginClick}
+            >
+              <Link to="/login">Log in</Link>
+            </Button>
+            <Button margin={'0 0 0 4px'}>
+              <Link to="/signup">Sign up</Link>
+            </Button>
+          </ButtonContainer>
+        ) : (
+          <UserMenu />
+          // <ButtonContainer>
+          //   <Button onClick={handleLogoutClick}>Log Out</Button>
+          // </ButtonContainer>
+        )}
       </HeaderContainer>
     </HeaderComponent>
   );
