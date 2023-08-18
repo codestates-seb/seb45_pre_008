@@ -1,18 +1,26 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { Editor } from 'react-draft-wysiwyg';
-import { EditorState } from 'draft-js';
+import { EditorState, convertToRaw } from 'draft-js';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import draftjsToHtml from 'draftjs-to-html';
 
 const Container = styled.div`
   width: 100%;
 `;
+const Hidden = styled.div`
+  display: none;
+`;
 
 const Draft = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  const [htmlString, setHtmlString] = useState('');
 
-  const updateTextDescription = (state) => {
-    setEditorState(state);
+  const updateTextDescription = async (state) => {
+    await setEditorState(state);
+    const html = draftjsToHtml(convertToRaw(editorState.getCurrentContent()));
+    setHtmlString(html);
+    console.log('html :', html);
   };
 
   return (
@@ -46,6 +54,7 @@ const Draft = () => {
           }}
         />
       </Container>
+      <Hidden dangerouslySetInnerHTML={{ __html: htmlString }} />
     </>
   );
 };
