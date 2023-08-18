@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginActions } from '../store/login';
 
@@ -107,9 +107,12 @@ const IconBox = styled.svg`
 
 const Topbar = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogoutClick = () => {
     dispatch(loginActions.logout());
+
+    navigate('/');
   };
 
   return (

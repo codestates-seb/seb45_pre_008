@@ -14,6 +14,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Main />}>
+          <Route path="/" element={<QuestionList />} />
           <Route path="/questions" element={<QuestionList />} />
         </Route>
         <Route path="/questions/ask" element={<Question />} />
