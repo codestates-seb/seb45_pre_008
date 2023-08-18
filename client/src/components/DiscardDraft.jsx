@@ -33,7 +33,7 @@ const CancelButton = styled(Button)`
 `;
 const XButton = styled(CancelButton)`
   padding: 10px;
-  margin: 0;
+  margin-top: -10px;
   width: 40px;
   font-size: 20px;
 `;
@@ -66,7 +66,7 @@ const ModalContent = styled.div`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 `;
 
-export default function DiscardDraft({ resetForm }) {
+export default function DiscardDraft({ resetForm, resetTagContent }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -82,6 +82,7 @@ export default function DiscardDraft({ resetForm }) {
   };
   const handleDiscard = () => {
     resetForm();
+    resetTagContent();
     closeModal();
   };
   return (
