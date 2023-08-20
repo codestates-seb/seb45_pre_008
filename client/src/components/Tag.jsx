@@ -5,14 +5,15 @@ import {
   QuestionBox,
   QuestionBoxTitle,
   QuestionBoxSubTitle,
-  NextButton,
-  InvalidNextButton,
+  //   Button,
+  //   InvalidNextButton,
   DescribeContainer1,
   DescribeTop,
   DescribeBottom,
   DescribeBottomContent,
   LinkAddress,
   WritingLogo,
+  ErrorMessage,
 } from './../assets/styles/QuestionStyle.jsx';
 import Writing from './../assets/images/writing-logo.svg';
 
@@ -69,9 +70,10 @@ const DescribeContainer4 = styled(DescribeContainer1)`
   height: 240px;
 `;
 
-export default function Tag({ tagList, setTagList, handleButtonClick }) {
+export default function Tag({ tagList, setTagList, errorMsg }) {
   const [tagItem, setTagItem] = useState('');
   const [isFocused, setIsFocused] = useState(false);
+  //   const [isButtonClicked, setIsButtonClicked] = useState(false);
 
   const onKeyPress = (e) => {
     if (e.target.value.length !== 0 && e.key === 'Enter') {
@@ -94,6 +96,9 @@ export default function Tag({ tagList, setTagList, handleButtonClick }) {
   const handleFocus = (focused) => {
     setIsFocused(focused);
   };
+  //   const handleNextButtonClick = () => {
+  //     setIsButtonClicked(true);
+  //   };
   return (
     <QuestionContainer>
       <TagBoxContainer>
@@ -134,13 +139,17 @@ export default function Tag({ tagList, setTagList, handleButtonClick }) {
             />
           )}
         </TagBox>
-        {tagList.length >= 1 ? (
-          <NextButton onClick={() => handleButtonClick(true, 'button4')}>
+        <ErrorMessage>{errorMsg.tagErr}</ErrorMessage>
+        {/* {tagList.length >= 1 ? (
+          <Button
+            onClick={handleNextButtonClick}
+            style={{ display: isButtonClicked ? 'none' : 'block' }}
+          >
             Next
-          </NextButton>
+          </Button>
         ) : (
           <InvalidNextButton>Next</InvalidNextButton>
-        )}
+        )} */}
       </TagBoxContainer>
       {isFocused && (
         <DescribeContainer4>

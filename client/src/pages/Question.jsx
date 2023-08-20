@@ -7,19 +7,22 @@ import {
   QuestionBoxSubTitle,
   QuestionContent,
   Button,
-  NextButton,
-  InvalidNextButton,
+  // NextButton,
+  // InvalidNextButton,
   DescribeContainer1,
   DescribeTop,
   DescribeBottom,
   DescribeBottomContent,
   LinkAddress,
   WritingLogo,
+  ErrorMessage,
 } from '../assets/styles/QuestionStyle.jsx';
 import Writing from './../assets/images/writing-logo.svg';
 import Draft from '../components/Draft.jsx';
 import Tag from '../components/Tag.jsx';
 import DiscardDraft from '../components/DiscardDraft.jsx';
+import { dummydata } from '../api/dummydata.js';
+import { EditorState } from 'draft-js';
 
 const MainBox = styled.main`
   padding: 0 24px 24px;
@@ -73,49 +76,110 @@ const DescribeContainer3 = styled(DescribeContainer1)`
 `;
 
 export default function Question() {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [subContent, setSubContent] = useState('');
+  const [isContentState, setIsContentState] = useState(
+    EditorState.createEmpty(),
+  );
+  const [isSubContentState, setIsSubContentState] = useState(
+    EditorState.createEmpty(),
+  );
+  const [askData, setAskData] = useState({
+    title: '',
+    content: '',
+    subContent: '',
+  });
   const [tagList, setTagList] = useState([]);
   const [isFocused, setIsFocused] = useState({
     selec1: false,
     selec2: false,
     selec3: false,
   });
-  const [isButtonHidden, setIsButtonHidden] = useState({
-    button1: false,
-    button2: false,
-    button3: false,
-    button4: false,
+  // const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const [errorMsg, setErrorMsg] = useState({
+    titleErr: '',
+    contentErr: '',
+    subContentErr: '',
+    tagErr: '',
   });
 
   const handleChangeTitle = (e) => {
-    setTitle(e.target.value);
+    setAskData({ ...askData, title: e.target.value });
   };
-  const handleChangeContent = (e) => {
-    setContent(e.target.value);
-    console.log('content :', e.target.value);
+  const handleChangeContent = (el) => {
+    setAskData({ ...askData, content: el });
+    // console.log('content :', el);
   };
-  const handleChangeSubContent = (e) => {
-    setSubContent(e.target.value);
-    console.log('subContent :', e.target.value);
+  const handleChangeSubContent = (el) => {
+    setAskData({ ...askData, subContent: el });
+    // console.log('subContent :', el);
   };
   const handleFocus = (value, key) => {
     setIsFocused({ ...isFocused, [key]: value });
   };
-  const resetForm = () => {
-    setTitle('');
-  };
-  const resetTagContent = () => {
+  const resetData = () => {
+    setAskData({ title: '', content: '', subContent: '' });
+    setIsContentState(EditorState.createEmpty());
+    setIsSubContentState(EditorState.createEmpty());
     setTagList([]);
   };
-  const handleButtonClick = (value, key) => {
-    setIsButtonHidden({ ...isButtonHidden, [key]: value });
+  const postQuestion = () => {
+    // console.log(
+    //   askData.title.length,
+    //   askData.content.length,
+    //   askData.subContent.length,
+    //   tagList.length,
+    // );
+    // if (askData.title) {
+    //   setErrorMsg({ ...errorMsg, titleErr: '15자 이상 입력하세요' });
+    // }
+    // if (askData.content.length < 20) {
+    //   setErrorMsg({ ...errorMsg, contentErr: '20자 이상 입력하세요' });
+    // }
+    // if (askData.subContent.length < 20) {
+    //   setErrorMsg({ ...errorMsg, subContentErr: '20자 이상 입력하세요' });
+    // }
+    // if (tagList.length < 1) {
+    //   setErrorMsg({ ...errorMsg, tagErr: '1개 이상 입력하세요' });
+    // }
+    if (
+      askData.title &&
+      askData.content &&
+      askData.subContent &&
+      tagList.length
+    ) {
+      const newData = {
+        questionId: dummydata[dummydata.length - 1].questionId + 1,
+        ...askData,
+        tags: tagList,
+      };
+      dummydata.push(newData);
+      console.log('Updated dummydata:', dummydata);
+      setAskData({ title: '', content: '', subContent: '' });
+      setTagList([]);
+      setIsContentState(EditorState.createEmpty());
+      setIsSubContentState(EditorState.createEmpty());
+      setErrorMsg({
+        titleErr: '',
+        contentErr: '',
+        subContentErr: '',
+        tagErr: '',
+      });
+    } else {
+      alert('빈 칸을 모두 채워주세요');
+    }
   };
+  // const handleTitleButtonClicked = () => {
+  //   setIsButtonClicked(true);
+  // };
+  // const areFieldsFilled = () => {
+  //   return (
+  //     askData.title.length > 15 &&
+  //     askData.content.length > 20 &&
+  //     askData.subContent.length > 20
+  //   );
+  // };
 
-  const isTitleValid = title.length >= 15;
-  const isContentValid = content.length >= 20;
-  const isSubContentValid = subContent.length >= 20;
+  // const isAllFilled = areFieldsFilled();
+  // const isTitleValid = askData.title.length >= 15;
 
   return (
     <MainBox>
@@ -171,20 +235,21 @@ export default function Question() {
           </QuestionBoxSubTitle>
           <QuestionContent
             placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
-            value={title}
-            onChange={handleChangeTitle}
+            value={askData.title}
+            onChange={(e) => handleChangeTitle(e)}
           ></QuestionContent>
-          {isTitleValid ? (
+          <ErrorMessage>{errorMsg.titleErr}</ErrorMessage>
+          {/* {isTitleValid ? (
             <NextButton
-              isHidden={isButtonHidden.button1}
-              onClick={() => handleButtonClick(true, 'button1')}
               disabled={!isTitleValid}
+              onClick={handleTitleButtonClicked}
+              style={{ display: isButtonClicked ? 'none' : 'block' }}
             >
               Next
             </NextButton>
           ) : (
             <InvalidNextButton>Next</InvalidNextButton>
-          )}
+          )} */}
         </QuestionBox>
         {isFocused.selec1 && (
           <DescribeContainer1>
@@ -216,14 +281,12 @@ export default function Question() {
             Introduce the problem and expand on what you put in the title.
             Minimum 20 characters.
           </QuestionBoxSubTitle>
-          <Draft value={content} onChange={handleChangeContent} />
-          <NextButton
-            isHidden={isButtonHidden.button2}
-            onClick={() => handleButtonClick(true, 'button2')}
-            disabled={!isContentValid}
-          >
-            Next
-          </NextButton>
+          <Draft
+            isState={isContentState}
+            setIsState={setIsContentState}
+            handleChange={handleChangeContent}
+          />
+          <ErrorMessage>{errorMsg.contentErr}</ErrorMessage>
         </QuestionBox>
         {isFocused.selec2 && (
           <DescribeContainer2>
@@ -251,14 +314,12 @@ export default function Question() {
             Describe what you tried, what you expected to happen, and what
             actually resulted. Minimum 20 characters.
           </QuestionBoxSubTitle>
-          <Draft value={subContent} onChange={handleChangeSubContent} />
-          <NextButton
-            isHidden={isButtonHidden.button3}
-            onClick={() => handleButtonClick(true, 'button3')}
-            disabled={!isSubContentValid}
-          >
-            Next
-          </NextButton>
+          <Draft
+            isState={isSubContentState}
+            setIsState={setIsSubContentState}
+            handleChange={handleChangeSubContent}
+          />
+          <ErrorMessage>{errorMsg.subContentErr}</ErrorMessage>
         </QuestionBox>
         {isFocused.selec3 && (
           <DescribeContainer3>
@@ -294,14 +355,9 @@ export default function Question() {
           </DescribeContainer3>
         )}
       </QuestionContainer>
-      <Tag
-        setIsButtonHidden={setIsButtonHidden}
-        handleButtonClick={handleButtonClick}
-        tagList={tagList}
-        setTagList={setTagList}
-      />
-      <Button>Post your question</Button>
-      <DiscardDraft resetForm={resetForm} resetTagContent={resetTagContent} />
+      <Tag tagList={tagList} setTagList={setTagList} errorMsg={errorMsg} />
+      <Button onClick={postQuestion}>Post your question</Button>
+      <DiscardDraft resetData={resetData} />
     </MainBox>
   );
 }
