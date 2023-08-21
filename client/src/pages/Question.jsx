@@ -7,8 +7,6 @@ import {
   QuestionBoxSubTitle,
   QuestionContent,
   Button,
-  // NextButton,
-  // InvalidNextButton,
   DescribeContainer1,
   DescribeTop,
   DescribeBottom,
@@ -93,7 +91,6 @@ export default function Question() {
     selec2: false,
     selec3: false,
   });
-  // const [isButtonClicked, setIsButtonClicked] = useState(false);
   const [errorMsg, setErrorMsg] = useState({
     titleErr: '',
     contentErr: '',
@@ -122,30 +119,32 @@ export default function Question() {
     setTagList([]);
   };
   const postQuestion = () => {
-    // console.log(
-    //   askData.title.length,
-    //   askData.content.length,
-    //   askData.subContent.length,
-    //   tagList.length,
-    // );
-    // if (askData.title) {
-    //   setErrorMsg({ ...errorMsg, titleErr: '15자 이상 입력하세요' });
-    // }
-    // if (askData.content.length < 20) {
-    //   setErrorMsg({ ...errorMsg, contentErr: '20자 이상 입력하세요' });
-    // }
-    // if (askData.subContent.length < 20) {
-    //   setErrorMsg({ ...errorMsg, subContentErr: '20자 이상 입력하세요' });
-    // }
-    // if (tagList.length < 1) {
-    //   setErrorMsg({ ...errorMsg, tagErr: '1개 이상 입력하세요' });
-    // }
+    const newErrorMsg = {
+      titleErr: '',
+      contentErr: '',
+      subContentErr: '',
+      tagErr: '',
+    };
+    if (!askData.title || askData.title.length < 15) {
+      newErrorMsg.titleErr = 'Title must be at least 15 characters';
+    }
+    if (askData.content.length < 20) {
+      newErrorMsg.contentErr = 'Please enter at least 20 characters';
+    }
+    if (askData.subContent.length < 20) {
+      newErrorMsg.subContentErr = 'Please enter at least 20 characters';
+    }
+    if (tagList.length < 1) {
+      newErrorMsg.tagErr = 'Please enter at least one';
+    }
     if (
-      askData.title &&
-      askData.content &&
-      askData.subContent &&
-      tagList.length
+      newErrorMsg.titleErr ||
+      newErrorMsg.contentErr ||
+      newErrorMsg.subContentErr ||
+      newErrorMsg.tagErr
     ) {
+      setErrorMsg(newErrorMsg);
+    } else {
       const newData = {
         questionId: dummydata[dummydata.length - 1].questionId + 1,
         ...askData,
@@ -163,23 +162,8 @@ export default function Question() {
         subContentErr: '',
         tagErr: '',
       });
-    } else {
-      alert('빈 칸을 모두 채워주세요');
     }
   };
-  // const handleTitleButtonClicked = () => {
-  //   setIsButtonClicked(true);
-  // };
-  // const areFieldsFilled = () => {
-  //   return (
-  //     askData.title.length > 15 &&
-  //     askData.content.length > 20 &&
-  //     askData.subContent.length > 20
-  //   );
-  // };
-
-  // const isAllFilled = areFieldsFilled();
-  // const isTitleValid = askData.title.length >= 15;
 
   return (
     <MainBox>
@@ -239,17 +223,6 @@ export default function Question() {
             onChange={(e) => handleChangeTitle(e)}
           ></QuestionContent>
           <ErrorMessage>{errorMsg.titleErr}</ErrorMessage>
-          {/* {isTitleValid ? (
-            <NextButton
-              disabled={!isTitleValid}
-              onClick={handleTitleButtonClicked}
-              style={{ display: isButtonClicked ? 'none' : 'block' }}
-            >
-              Next
-            </NextButton>
-          ) : (
-            <InvalidNextButton>Next</InvalidNextButton>
-          )} */}
         </QuestionBox>
         {isFocused.selec1 && (
           <DescribeContainer1>

@@ -100,5 +100,7 @@ export const WritingLogo = styled.img`
   height: 48px;
 `;
 export const ErrorMessage = styled.div`
-  color: red;
+  margin: 4px;
+  color: #d0393e;
+  font-size: 12px;
 `;
