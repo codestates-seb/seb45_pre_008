@@ -1,5 +1,6 @@
 package com.example.backendpre.answer.dto;
 
+import com.example.backendpre.answer.entity.Answer;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,5 +11,5 @@ public class AnswerPatchDto {
 
     private String body;
 
-
+    private Answer.AnswerStatus answerStatus;
 }

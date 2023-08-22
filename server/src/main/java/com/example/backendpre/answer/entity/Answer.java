@@ -1,5 +1,7 @@
 package com.example.backendpre.answer.entity;
 
+import com.example.backendpre.member.entity.Member;
+import com.example.backendpre.question.entity.Question;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,24 +16,28 @@ public class Answer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long answerId;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
-    private String body;
-
-    /*
-//    User와 매핑
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-//    question과 매핑
-    @ManyToOne
-    @JoinColumn(name = "question_id")
-    private Question question;
-     */
-
     @Enumerated(value = EnumType.STRING)
     @Column(length = 20, nullable = false)
     private AnswerStatus answerStatus = AnswerStatus.Answer_EXIST;
+
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String body;
+
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    public void addMember(Member member) {
+        this.member = member;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "question_id")
+    private Question question;
+
+    public void addQuestion(Question question) {
+        this.question = question;
+    }
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
