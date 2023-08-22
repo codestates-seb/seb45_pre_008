@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { styled } from 'styled-components';
 import Questions from '../components/Questions.jsx';
 import { useEffect, useState } from 'react';
-import { dummydata } from '../data/dummydata.js';
+import { dummydata } from '../api/dummydata.js';
 import { useSelector } from 'react-redux';
 
 const ContentHeader = styled.div`

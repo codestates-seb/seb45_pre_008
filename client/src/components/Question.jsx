@@ -82,6 +82,10 @@ const DescribeContainer3 = styled(DescribeContainer1)`
   height: 300px;
 `;
 
+const TagBoxContainer = styled(QuestionBox)`
+  margin: 0 0 64px 0;
+`;
+
 export default function Question() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');

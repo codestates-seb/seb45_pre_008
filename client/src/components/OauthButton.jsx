@@ -97,23 +97,6 @@ export default function OauthButton() {
         </OAuthButton> */}
 
         <FacebookLoginButton
-          style={{
-            marginTop: '15px',
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-            padding: '8px 12px',
-            border: 'none',
-            borderRadius: '3px',
-            marginRight: '10px',
-            cursor: 'pointer',
-            width: '325px',
-            height: '40px',
-            color: '#fff',
-            backgroundColor: '#314a86',
-            transition: 'filter 0.3s',
-          }}
           appId={FACEBOOK_CLIENT_ID}
           onSuccess={(response) => {
             console.log('Login Success!');
