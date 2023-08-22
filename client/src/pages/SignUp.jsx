@@ -31,6 +31,7 @@ const SignImg = styled.img`
   height: 26px;
   top: 30px;
   color: #0077cc;
+  margin-right: 10px;
 `;
 
 const SignUpPage = styled.div`
@@ -146,7 +147,7 @@ export default function SignUp() {
     validateEmail();
     validatePassword();
 
-    if (emailError || passwordError) {
+    if (!username || !email || !password) {
       console.log('유효성 검사 실패');
     } else {
       // 더미 사용자 데이터 생성
