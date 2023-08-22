@@ -76,11 +76,15 @@ const ButtonContainer = styled.div`
 `;
 
 const Header = () => {
-  const isLogin = useSelector((state) => state.login.loginState);
+  const isLoggedin = useSelector((state) => state.login.isLoggedin);
+  const user = useSelector((state) => state.login.user);
   const dispatch = useDispatch();
 
   const handleLoginClick = () => {
-    dispatch(loginActions.login());
+    if (user) {
+      dispatch(loginActions.loginUserSuccess());
+      console.log(isLoggedin);
+    }
   };
 
   return (
@@ -89,7 +93,7 @@ const Header = () => {
         <LogoLink to="/">
           <LogoImage />
         </LogoLink>
-        {!isLogin ? (
+        {!isLoggedin ? (
           <NavigationList>
             <li>About</li>
             <li>Products</li>
@@ -101,7 +105,7 @@ const Header = () => {
           </NavigationList>
         )}
         <Search />
-        {!isLogin ? (
+        {!isLoggedin ? (
           <ButtonContainer>
             <Button
               color={'#39739D'}
@@ -117,6 +121,7 @@ const Header = () => {
           </ButtonContainer>
         ) : (
           <UserMenu />
+          isLoggedin && <UserMenu />
         )}
       </HeaderContainer>
     </HeaderComponent>
