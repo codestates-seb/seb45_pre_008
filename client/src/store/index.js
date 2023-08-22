@@ -4,7 +4,11 @@ import userReducer from './userSlice';
 import loginReducer from './login';
 
 const store = configureStore({
-  reducer: { user: userReducer, login: loginReducer, search: searchSlice.reducer, },
+  reducer: {
+    user: userReducer,
+    login: loginReducer,
+    search: searchSlice.reducer,
+  },
 });
 
 export default store;

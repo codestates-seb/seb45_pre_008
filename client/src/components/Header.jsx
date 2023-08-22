@@ -120,7 +120,6 @@ const Header = () => {
             </Button>
           </ButtonContainer>
         ) : (
-          <UserMenu />
           isLoggedin && <UserMenu />
         )}
       </HeaderContainer>
