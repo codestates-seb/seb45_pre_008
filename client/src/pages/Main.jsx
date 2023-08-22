@@ -26,6 +26,7 @@ const Content = styled.div`
 
 const Mainbar = styled.div`
   width: calc(100% - 300px - 24px);
+  min-height: 924px;
   float: left;
 `;
 
