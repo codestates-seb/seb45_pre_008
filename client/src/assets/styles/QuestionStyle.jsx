@@ -19,7 +19,7 @@ export const QuestionBox = styled.div`
   border: 1px solid rgb(228, 230, 232);
   border-radius: 8px;
   width: 70%;
-  max-width: 800px;
+  min-width: 800px;
 `;
 export const QuestionBoxTitle = styled.div`
   font-size: 15px;
@@ -98,4 +98,9 @@ export const DescribeBottomContent = styled.p`
 export const WritingLogo = styled.img`
   width: 48px;
   height: 48px;
+`;
+export const ErrorMessage = styled.div`
+  margin: 4px;
+  color: #d0393e;
+  font-size: 12px;
 `;

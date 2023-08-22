@@ -57,6 +57,7 @@ const ModalOverlay = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 90;
 `;
 
 const ModalContent = styled.div`
@@ -66,7 +67,7 @@ const ModalContent = styled.div`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 `;
 
-export default function DiscardDraft({ resetForm, resetTagContent }) {
+export default function DiscardDraft({ resetData }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -79,11 +80,6 @@ export default function DiscardDraft({ resetForm, resetTagContent }) {
     if (e.target === e.currentTarget) {
       closeModal();
     }
-  };
-  const handleDiscard = () => {
-    resetForm();
-    resetTagContent();
-    closeModal();
   };
   return (
     <>
@@ -99,7 +95,12 @@ export default function DiscardDraft({ resetForm, resetTagContent }) {
               Are you sure you want to discard this question? This cannot be
               undone.
             </p>
-            <DeleteButton onClick={handleDiscard}>
+            <DeleteButton
+              onClick={() => {
+                resetData();
+                closeModal();
+              }}
+            >
               Discard question
             </DeleteButton>
             <CancelButton onClick={closeModal}>Cancel</CancelButton>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { Editor } from 'react-draft-wysiwyg';
-import { EditorState, convertToRaw } from 'draft-js';
+import { convertToRaw } from 'draft-js';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import draftjsToHtml from 'draftjs-to-html';
 
@@ -12,22 +12,22 @@ const Hidden = styled.div`
   display: none;
 `;
 
-const Draft = () => {
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+const Draft = ({ handleChange, isState, setIsState }) => {
+  // const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [htmlString, setHtmlString] = useState('');
-
   const updateTextDescription = async (state) => {
-    await setEditorState(state);
-    const html = draftjsToHtml(convertToRaw(editorState.getCurrentContent()));
+    await setIsState(state);
+    const html = draftjsToHtml(convertToRaw(isState.getCurrentContent()));
     setHtmlString(html);
-    console.log('html :', html);
+    // console.log('html :', html);
+    await handleChange(html);
   };
 
   return (
     <>
       <Container>
         <Editor
-          editorState={editorState}
+          editorState={isState}
           onEditorStateChange={updateTextDescription}
           editorStyle={{
             height: '130px',
