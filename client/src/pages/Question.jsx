@@ -19,8 +19,8 @@ import Writing from './../assets/images/writing-logo.svg';
 import Draft from '../components/Draft.jsx';
 import Tag from '../components/Tag.jsx';
 import DiscardDraft from '../components/DiscardDraft.jsx';
-import { dummydata } from '../api/dummydata.js';
 import { EditorState } from 'draft-js';
+import { getData, saveData } from '../components/localStorage.js';
 
 const MainBox = styled.main`
   padding: 0 24px 24px;
@@ -145,13 +145,14 @@ export default function Question() {
     ) {
       setErrorMsg(newErrorMsg);
     } else {
+      const localData = getData('stackData');
       const newData = {
-        questionId: dummydata[dummydata.length - 1].questionId + 1,
+        questionId: localData[localData.length - 1].questionId + 1,
         ...askData,
         tags: tagList,
       };
-      dummydata.push(newData);
-      console.log('Updated dummydata:', dummydata);
+      const newLocalData = [...localData, newData];
+
       setAskData({ title: '', content: '', subContent: '' });
       setTagList([]);
       setIsContentState(EditorState.createEmpty());
@@ -162,6 +163,9 @@ export default function Question() {
         subContentErr: '',
         tagErr: '',
       });
+      saveData(newLocalData);
+
+      console.log(getData('stackData'));
     }
   };
 

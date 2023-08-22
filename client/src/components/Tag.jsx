@@ -73,7 +73,6 @@ const DescribeContainer4 = styled(DescribeContainer1)`
 export default function Tag({ tagList, setTagList, errorMsg }) {
   const [tagItem, setTagItem] = useState('');
   const [isFocused, setIsFocused] = useState(false);
-  //   const [isButtonClicked, setIsButtonClicked] = useState(false);
 
   const onKeyPress = (e) => {
     if (e.target.value.length !== 0 && e.key === 'Enter') {
@@ -96,9 +95,6 @@ export default function Tag({ tagList, setTagList, errorMsg }) {
   const handleFocus = (focused) => {
     setIsFocused(focused);
   };
-  //   const handleNextButtonClick = () => {
-  //     setIsButtonClicked(true);
-  //   };
   return (
     <QuestionContainer>
       <TagBoxContainer>
@@ -140,16 +136,6 @@ export default function Tag({ tagList, setTagList, errorMsg }) {
           )}
         </TagBox>
         <ErrorMessage>{errorMsg.tagErr}</ErrorMessage>
-        {/* {tagList.length >= 1 ? (
-          <Button
-            onClick={handleNextButtonClick}
-            style={{ display: isButtonClicked ? 'none' : 'block' }}
-          >
-            Next
-          </Button>
-        ) : (
-          <InvalidNextButton>Next</InvalidNextButton>
-        )} */}
       </TagBoxContainer>
       {isFocused && (
         <DescribeContainer4>
