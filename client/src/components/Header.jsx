@@ -76,7 +76,7 @@ const ButtonContainer = styled.div`
 `;
 
 const Header = () => {
-  const isLoggedin = useSelector((state) => state.login.loginState);
+  const isLoggedin = useSelector((state) => state.login.isLoggedin);
   const user = useSelector((state) => state.login.user);
   const dispatch = useDispatch();
 
