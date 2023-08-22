@@ -2,7 +2,6 @@ package com.example.backendpre.question.controller;
 
 import com.example.backendpre.answer.mapper.AnswerMapper;
 import com.example.backendpre.answer.service.AnswerService;
-import com.example.backendpre.member.entity.Member;
 import com.example.backendpre.member.service.MemberService;
 import com.example.backendpre.question.dto.QuestionPatchDto;
 import com.example.backendpre.question.dto.QuestionPostDto;
@@ -12,7 +11,6 @@ import com.example.backendpre.question.mapper.QuestionMapper;
 import com.example.backendpre.question.service.QuestionService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -50,7 +48,7 @@ public class QuestionController {
     }
 
     /**
-     * 자신이 작성한 질문 글 수정, 삭제 API
+     * 자신이 작성한 질문 글 수정 API
      */
     @PatchMapping("/question/{question-id}")
     public ResponseEntity patchQuestion(
@@ -97,5 +95,10 @@ public class QuestionController {
 //
 //        return new ResponseEntity<>(mapper.questionsToQuestionResponseDtos(questions), HttpStatus.OK);
 //    }
-    
+
+    @DeleteMapping("/question/{question-id}")
+    public ResponseEntity deleteQuestion(@PathVariable("question-id") @Positive long questionId) {
+        questionService.deleteQuestion(questionId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

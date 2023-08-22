@@ -7,9 +7,6 @@ import com.example.backendpre.member.service.MemberService;
 import com.example.backendpre.question.entity.Question;
 import com.example.backendpre.question.repository.QuestionRepository;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -106,9 +103,9 @@ public class QuestionService {
 //        return questions;
 //    }
 
-//    public void deleteQuestion(long questionId) {
-//        questionRepository.deleteById(questionId);
-//    }
+    public void deleteQuestion(long questionId) {
+        questionRepository.deleteById(questionId);
+    }
 
     private void VerifiedNoQuestion(Page<Question> findAllQuestion) {
         if (findAllQuestion.getTotalElements() == 0) {

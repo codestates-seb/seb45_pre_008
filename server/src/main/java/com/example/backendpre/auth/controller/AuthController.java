@@ -1,10 +1,9 @@
 package com.example.backendpre.auth.controller;
 
-import com.example.backendpre.member.dto.MemberLoginDto;
 import com.example.backendpre.auth.dto.TokenDto;
 import com.example.backendpre.jwt.JwtFilter;
 import com.example.backendpre.jwt.TokenProvider;
-import lombok.Getter;
+import com.example.backendpre.member.dto.MemberLoginDto;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +11,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 

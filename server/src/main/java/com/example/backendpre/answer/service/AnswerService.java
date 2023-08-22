@@ -12,7 +12,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -52,11 +51,11 @@ public class AnswerService {
         Optional.of(answer.getModifiedAt())
                 .ifPresent(answerModifiedAt -> findAnswer.setModifiedAt(answerModifiedAt));
 
-        // 글 삭제 로직
-        Optional.of(answer.getAnswerStatus())
-                .ifPresent(answerStatus -> findAnswer.setAnswerStatus(answerStatus));
-
-        findAnswer.setModifiedAt(LocalDateTime.now());
+//        // 글 삭제 로직
+//        Optional.of(answer.getAnswerStatus())
+//                .ifPresent(answerStatus -> findAnswer.setAnswerStatus(answerStatus));
+//
+//        findAnswer.setModifiedAt(LocalDateTime.now());
 
         return answerRepository.save(findAnswer);
     }
