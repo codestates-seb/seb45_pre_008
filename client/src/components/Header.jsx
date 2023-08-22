@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ReactComponent as HeaderLogo } from '../assets/images/header-logo.svg';
 import { Button } from './Button.jsx';
 import Search from './Search.jsx';
-import { loginActions } from '../store/login';
+import { loginActions } from '../store/login.js';
 import { useDispatch, useSelector } from 'react-redux';
 import UserMenu from './UserMenu.jsx';
 
@@ -76,7 +76,7 @@ const ButtonContainer = styled.div`
 `;
 
 const Header = () => {
-  const isLoggedin = useSelector((state) => state.login.isLoggedin);
+  const isLoggedin = useSelector((state) => state.login.loginState);
   const user = useSelector((state) => state.login.user);
   const dispatch = useDispatch();
 
@@ -120,7 +120,6 @@ const Header = () => {
             </Button>
           </ButtonContainer>
         ) : (
-          <UserMenu />
           isLoggedin && <UserMenu />
         )}
       </HeaderContainer>
