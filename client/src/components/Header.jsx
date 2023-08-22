@@ -76,11 +76,15 @@ const ButtonContainer = styled.div`
 `;
 
 const Header = () => {
-  const isLogin = useSelector((state) => state.login.loginState);
+  const isLoggedin = useSelector((state) => state.login.isLoggedin);
+  const user = useSelector((state) => state.login.user);
   const dispatch = useDispatch();
 
   const handleLoginClick = () => {
-    dispatch(loginActions.login());
+    if (user) {
+      dispatch(loginActions.loginUserSuccess());
+      console.log(isLoggedin);
+    }
   };
 
   // 임시 로그아웃 버튼
@@ -94,7 +98,7 @@ const Header = () => {
         <LogoLink to="/">
           <LogoImage />
         </LogoLink>
-        {!isLogin ? (
+        {!isLoggedin ? (
           <NavigationList>
             <li>About</li>
             <li>Products</li>
@@ -106,12 +110,12 @@ const Header = () => {
           </NavigationList>
         )}
         <Search />
-        {!isLogin ? (
+        {!isLoggedin ? (
           <ButtonContainer>
             <Button
               color={'#39739D'}
               backColor={'#E1ECF4'}
-              hoverColor={'#B3D3EA'}
+              hoverColor={'#1f2e39'}
               onClick={handleLoginClick}
             >
               <Link to="/login">Log in</Link>
@@ -121,7 +125,7 @@ const Header = () => {
             </Button>
           </ButtonContainer>
         ) : (
-          <UserMenu />
+          isLoggedin && <UserMenu />
           // <ButtonContainer>
           //   <Button onClick={handleLogoutClick}>Log Out</Button>
           // </ButtonContainer>

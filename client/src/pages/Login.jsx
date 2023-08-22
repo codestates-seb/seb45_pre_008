@@ -1,9 +1,10 @@
-import React from 'react'; // eslint-disable-line no-unused-vars
+import React, { useState } from 'react'; // eslint-disable-line no-unused-vars
 import stackoverflow from '../assets/images/stackoverflow.svg';
 import styled from 'styled-components';
 import OauthButton from '../components/OauthButton.jsx';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { loginActions } from '../store/login.js';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = styled.div`
   display: flex;
@@ -78,10 +79,29 @@ const Extend = styled.p`
 `;
 
 export default function Login() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const loginHandler = (e) => {
-    e.preventDefault();
-    dispatch(loginActions.login());
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const users = useSelector((state) => state.user);
+
+  const handleLogin = () => {
+    console.log('Email:', email);
+    console.log('Password:', password);
+    const user = users.find(
+      (user) => user.email === email && user.password === password,
+    );
+
+    if (user) {
+      dispatch(loginActions.loginUserSuccess());
+      console.log('로그인 성공:', user);
+      navigate('/');
+
+      // 로그인 성공 처리 로직 추가
+    } else {
+      console.log('로그인 실패: 아이디 또는 비밀번호가 일치하지 않습니다');
+    }
   };
 
   return (
@@ -89,15 +109,27 @@ export default function Login() {
       <LoginPage>
         <Logo src={stackoverflow} alt="Stack Overflow Logo" />
         <OauthButton />
-        <LoginForm>
+        <LoginForm onSubmit={handleLogin}>
           <FormLabel htmlFor="email">Email:</FormLabel>
-          <FormInput type="email" id="email" placeholder="Email" />
+          <FormInput
+            type="email"
+            id="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
           <FormField>
             <FormLabel htmlFor="password">Password:</FormLabel>
             <ForgotPasswordButton>Forgot Password?</ForgotPasswordButton>
           </FormField>
-          <FormInput type="password" id="password" placeholder="Password" />
-          <SubmitButton type="submit" onClick={loginHandler}>
+          <FormInput
+            type="password"
+            id="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <SubmitButton type="button" onClick={handleLogin}>
             Login
           </SubmitButton>
         </LoginForm>

@@ -1,7 +1,10 @@
-import React from 'react'; // eslint-disable-line no-unused-vars
+import React, { useState, useRef, useEffect } from 'react'; // eslint-disable-line no-unused-vars
 import styled from 'styled-components';
 import OauthButton from '../components/OauthButton.jsx';
 import images from '../assets/images/index.js';
+import { useDispatch } from 'react-redux';
+import { addUser } from '../store/userSlice.js';
+import { useNavigate } from 'react-router-dom';
 
 const SignUpContainer = styled.div`
   display: flex;
@@ -52,6 +55,7 @@ const FormLabel = styled.label`
   display: block;
   font-weight: bold;
   margin-bottom: 5px;
+  margin-top: 10px;
 `;
 
 const FormInput = styled.input`
@@ -82,7 +86,105 @@ const SignInLink = styled.a`
   margin-top: 10px;
 `;
 
+const EmailError = styled.div`
+  font-size: 14px;
+  color: #d03932;
+  margin-top: 0.5rem;
+`;
+
+const PasswordError = styled.div`
+  font-size: 14px;
+  color: #d03932;
+  margin-top: 5px;
+`;
+
 export default function SignUp() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
+  };
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const validateEmail = () => {
+    if (!email) {
+      setEmailError('이메일을 입력해주세요');
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      setEmailError('유효하지 않은 이메일 주소입니다');
+    } else {
+      setEmailError('');
+    }
+  };
+
+  const validatePassword = () => {
+    if (!password) {
+      setPasswordError('비밀번호를 입력해주세요');
+    } else if (!/(?=.*[A-Za-z])(?=.*\d).{8,}/.test(password)) {
+      setPasswordError(
+        '비밀번호는 적어도 1개의 문자와 1개의 숫자를 포함하여 8자 이상이어야 합니다',
+      );
+    } else {
+      setPasswordError('');
+    }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    validateEmail();
+    validatePassword();
+
+    if (emailError || passwordError) {
+      console.log('유효성 검사 실패');
+    } else {
+      // 더미 사용자 데이터 생성
+      const newUser = { username, email, password };
+
+      dispatch(addUser(newUser));
+
+      navigate('/login');
+
+      console.log('더미 회원가입 성공:', newUser);
+    }
+
+    // // 이메일과 비밀번호 모두 유효한 경우, 회원가입 로직을 실행합니다
+    // if (!emailError && !passwordError) {
+    //   try {
+    //     // 여기에 실제 회원가입 API 호출 등의 로직을 수행합니다.
+    //     const response = await fetch('/api/signup', {
+    //       method: 'POST',
+    //       headers: {
+    //         'Content-Type': 'application/json',
+    //       },
+    //       body: JSON.stringify({ email, password }),
+    //     });
+
+    //     if (response.ok) {
+    //       // 회원가입이 성공한 경우, 사용자를 로그인 페이지로 리디렉션하거나
+    //       // 필요한 로직을 수행합니다.
+    //       console.log('회원가입 성공!');
+    //     } else {
+    //       // 회원가입이 실패한 경우, 적절한 처리를 수행합니다.
+    //       console.error('회원가입 실패');
+    //     }
+    //   } catch (error) {
+    //     console.error('오류 발생:', error);
+    //   }
+    // }
+  };
+
   return (
     <SignUpContainer>
       <SignUpExplain>
@@ -112,13 +214,33 @@ export default function SignUp() {
       </SignUpExplain>
       <SignUpPage>
         <OauthButton />
-        <SignUpForm>
+        <SignUpForm onSubmit={handleSubmit}>
           <FormLabel htmlFor="username">Display name:</FormLabel>
-          <FormInput type="text" id="username" placeholder="Username" />
+          <FormInput
+            type="text"
+            id="username"
+            placeholder="Username"
+            onChange={handleUsernameChange}
+          />
           <FormLabel htmlFor="email">Email:</FormLabel>
-          <FormInput type="email" id="email" placeholder="Email" />
+          <FormInput
+            type="email"
+            id="email"
+            placeholder="Email"
+            onChange={handleEmailChange}
+          />
+          <EmailError>{emailError}</EmailError>
+
           <FormLabel htmlFor="password">Password:</FormLabel>
-          <FormInput type="password" id="password" placeholder="Password" />
+          <FormInput
+            type="password"
+            id="password"
+            placeholder="Password"
+            onChange={handlePasswordChange}
+            disabled={false}
+          />
+          <PasswordError>{passwordError}</PasswordError>
+
           <p>
             Passwords must contain at least eight characters, including at least
             1 letter and 1 number.

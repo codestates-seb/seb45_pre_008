@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { loginActions } from '../store/login';
+import { loginActions } from '../store/login.js';
 
 const TopbarContainer = styled.div`
   z-index: 999;
@@ -110,7 +110,7 @@ const Topbar = () => {
   const navigate = useNavigate();
 
   const handleLogoutClick = () => {
-    dispatch(loginActions.logout());
+    dispatch(loginActions.logoutUser());
 
     navigate('/');
   };
