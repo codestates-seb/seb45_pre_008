@@ -3,8 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { styled } from 'styled-components';
 import Questions from '../components/Questions.jsx';
 import { useEffect, useState } from 'react';
-import { dummydata } from '../api/dummydata.js';
 import { useSelector } from 'react-redux';
+import { getData } from '../components/localStorage.js';
 
 const ContentHeader = styled.div`
   display: flex;
@@ -36,10 +36,12 @@ const QuestionList = () => {
   const [questions, setQuestions] = useState([]);
   const location = useLocation();
   const searchVal = useSelector((state) => state.search.searchValue);
-  const isLogin = useSelector((state) => state.login.loginState);
+  const isLogin = useSelector((state) => state.login.isLoggedin);
 
   const headline =
     location.pathname === '/' ? 'Top Questions' : 'All Questions';
+
+  const localData = getData('stackData');
 
   useEffect(() => {
     const keyWord = decodeURI(location.search);
@@ -47,7 +49,7 @@ const QuestionList = () => {
     if (keyWord) {
       const fetchPosts = async () => {
         try {
-          const searchData = dummydata.filter((question) => {
+          const searchData = localData.filter((question) => {
             const titleMatches = question.title
               .toLowerCase()
               .includes(searchVal.toLowerCase());
@@ -67,7 +69,7 @@ const QuestionList = () => {
     } else {
       const fetchPosts = async () => {
         try {
-          setQuestions(dummydata);
+          setQuestions(localData);
         } catch (err) {
           console.err(err);
         }

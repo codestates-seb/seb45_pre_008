@@ -150,6 +150,12 @@ export default function Question() {
         questionId: localData[localData.length - 1].questionId + 1,
         ...askData,
         tags: tagList,
+        stats: {
+          voteCount: 0,
+          answerCount: 0,
+          viewCount: 0,
+        },
+        createdAt: new Date(),
       };
       const newLocalData = [...localData, newData];
 
