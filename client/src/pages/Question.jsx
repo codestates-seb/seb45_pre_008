@@ -102,7 +102,11 @@ export default function Question() {
     setAskData({ ...askData, title: e.target.value });
   };
   const handleChangeContent = (el) => {
-    setAskData({ ...askData, content: el });
+    // 내용에 <p> 없애기
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(el, 'text/html');
+    const plainText = doc.body.textContent;
+    setAskData({ ...askData, content: plainText });
     // console.log('content :', el);
   };
   const handleChangeSubContent = (el) => {

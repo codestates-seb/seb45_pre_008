@@ -41,7 +41,7 @@ const QuestionList = () => {
   const headline =
     location.pathname === '/' ? 'Top Questions' : 'All Questions';
 
-  const localData = getData('stackData');
+  const localData = getData('stackData').reverse();
 
   useEffect(() => {
     const keyWord = decodeURI(location.search);
