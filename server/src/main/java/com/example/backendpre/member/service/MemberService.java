@@ -1,13 +1,13 @@
 package com.example.backendpre.member.service;
 
 
-import com.example.backendpre.member.dto.MemberPostDto;
-import com.example.backendpre.member.entity.Member;
-import com.example.backendpre.member.repository.MemberRepository;
 import com.example.backendpre.auth.entity.Authority;
 import com.example.backendpre.auth.util.SecurityUtil;
 import com.example.backendpre.exception.DuplicateMemberException;
 import com.example.backendpre.exception.NotFoundMemberException;
+import com.example.backendpre.member.dto.MemberPostDto;
+import com.example.backendpre.member.entity.Member;
+import com.example.backendpre.member.repository.MemberRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

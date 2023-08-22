@@ -1,15 +1,13 @@
 package com.example.backendpre.member.dto;
 
 
-import com.example.backendpre.member.entity.Member;
 import com.example.backendpre.auth.dto.AuthorityDto;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.example.backendpre.member.entity.Member;
 import lombok.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Set;
 import java.util.stream.Collectors;
 
