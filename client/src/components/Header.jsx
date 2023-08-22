@@ -87,11 +87,6 @@ const Header = () => {
     }
   };
 
-  // 임시 로그아웃 버튼
-  // const handleLogoutClick = () => {
-  //   dispatch(loginActions.logout());
-  // };
-
   return (
     <HeaderComponent>
       <HeaderContainer>
@@ -114,8 +109,8 @@ const Header = () => {
           <ButtonContainer>
             <Button
               color={'#39739D'}
-              backColor={'#E1ECF4'}
-              hoverColor={'#1f2e39'}
+              backcolor={'#E1ECF4'}
+              hovercolor={'#B3D3EA'}
               onClick={handleLoginClick}
             >
               <Link to="/login">Log in</Link>
@@ -125,10 +120,8 @@ const Header = () => {
             </Button>
           </ButtonContainer>
         ) : (
+          <UserMenu />
           isLoggedin && <UserMenu />
-          // <ButtonContainer>
-          //   <Button onClick={handleLogoutClick}>Log Out</Button>
-          // </ButtonContainer>
         )}
       </HeaderContainer>
     </HeaderComponent>
