@@ -30,6 +30,7 @@ const GlobalStyle = createGlobalStyle`
 
     a:hover, a:active, a:visited {
         text-decoration: none; 
+        color: inherit;
     }
 
     input:not(.tag-input) {

@@ -5,7 +5,7 @@ import {
   QuestionBox,
   QuestionBoxTitle,
   QuestionBoxSubTitle,
-  Button,
+  NextButton,
   InvalidNextButton,
   DescribeContainer1,
   DescribeTop,
@@ -69,9 +69,8 @@ const DescribeContainer4 = styled(DescribeContainer1)`
   height: 240px;
 `;
 
-export default function Tag() {
+export default function Tag({ tagList, setTagList, handleButtonClick }) {
   const [tagItem, setTagItem] = useState('');
-  const [tagList, setTagList] = useState([]);
   const [isFocused, setIsFocused] = useState(false);
 
   const onKeyPress = (e) => {
@@ -136,7 +135,9 @@ export default function Tag() {
           )}
         </TagBox>
         {tagList.length >= 1 ? (
-          <Button disabled>Next</Button>
+          <NextButton onClick={() => handleButtonClick(true, 'button4')}>
+            Next
+          </NextButton>
         ) : (
           <InvalidNextButton>Next</InvalidNextButton>
         )}

@@ -5,6 +5,7 @@ import signbadge from './signbadge.svg';
 import facebook from './facebook.svg';
 import google from './google.svg';
 import github from './github.svg';
+import stackoverflow from './stackoverflow.svg';
 
 const images = {
   signque,
@@ -14,6 +15,7 @@ const images = {
   facebook,
   google,
   github,
+  stackoverflow,
 };
 
 export default images;

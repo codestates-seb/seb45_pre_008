@@ -21,14 +21,15 @@ const NavLink = styled(Link)`
   align-items: center;
   font-size: 13px;
   color: #525960;
+  fill: #525960;
   .question-icon {
     margin-left: -1px;
     margin-right: 4px;
     width: 18px;
     height: 18px;
-    fill: currentColor;
   }
   &.clicked {
+    fill: currentColor;
     background: #f1f2f3;
     font-weight: bold;
     color: #0c0d0e;

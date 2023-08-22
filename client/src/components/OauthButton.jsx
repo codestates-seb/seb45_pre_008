@@ -1,6 +1,7 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import styled from 'styled-components';
 import images from '../assets/images/index.js';
+import { useGoogleLogin } from '@react-oauth/google';
 
 const OAuthButtons = styled.div`
   margin-top: 20px;
@@ -33,14 +34,28 @@ const OAuthButtonImg = styled.img`
 `;
 
 export default function OauthButton() {
+  const CLIENT_ID = process.env.REACT_APP_GITHUB_CLIENT_ID;
+  const googleSocialLogin = useGoogleLogin({
+    onSuccess: (codeResponse) => console.log(codeResponse),
+    flow: 'auth-code',
+  });
+
+  const githubSocialLogin = () => {
+    const loginUri = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&scope=repo:status read:repo_hook user:email&redirect_uri=http://localhost:3000`;
+    window.location.href = loginUri;
+  };
   return (
     <>
       <OAuthButtons>
-        <OAuthButton bgColor="#ffffff" textColor="#000000">
+        <OAuthButton
+          bgColor="#ffffff"
+          textColor="#000000"
+          onClick={googleSocialLogin}
+        >
           <OAuthButtonImg src={images.google} alt="" />
           Login with Google
         </OAuthButton>
-        <OAuthButton bgColor="#24292e">
+        <OAuthButton bgColor="#24292e" onClick={githubSocialLogin}>
           <OAuthButtonImg src={images.github} alt="" />
           Login with GitHub
         </OAuthButton>

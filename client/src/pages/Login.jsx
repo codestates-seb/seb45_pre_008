@@ -2,7 +2,9 @@ import React, { useState } from 'react'; // eslint-disable-line no-unused-vars
 import stackoverflow from '../assets/images/stackoverflow.svg';
 import styled from 'styled-components';
 import OauthButton from '../components/OauthButton.jsx';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { loginActions } from '../store/login.js';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = styled.div`
   display: flex;
@@ -77,6 +79,8 @@ const Extend = styled.p`
 `;
 
 export default function Login() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -90,7 +94,10 @@ export default function Login() {
     );
 
     if (user) {
+      dispatch(loginActions.loginUserSuccess());
       console.log('로그인 성공:', user);
+      navigate('/');
+
       // 로그인 성공 처리 로직 추가
     } else {
       console.log('로그인 실패: 아이디 또는 비밀번호가 일치하지 않습니다');

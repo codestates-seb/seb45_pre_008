@@ -4,6 +4,7 @@ import OauthButton from '../components/OauthButton.jsx';
 import images from '../assets/images/index.js';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../store/userSlice.js';
+import { useNavigate } from 'react-router-dom';
 
 const SignUpContainer = styled.div`
   display: flex;
@@ -99,6 +100,7 @@ const PasswordError = styled.div`
 
 export default function SignUp() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -151,6 +153,8 @@ export default function SignUp() {
       const newUser = { username, email, password };
 
       dispatch(addUser(newUser));
+
+      navigate('/login');
 
       console.log('더미 회원가입 성공:', newUser);
     }
