@@ -33,6 +33,7 @@ const Search = () => {
     e.preventDefault();
     if (searchVal) {
       setSearchParams({ q: searchVal });
+      navigate(`/search?q=${searchVal}`);
       dispatch(search(searchVal));
     } else {
       navigate('/questions');
