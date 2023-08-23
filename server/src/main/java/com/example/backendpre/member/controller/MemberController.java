@@ -18,7 +18,6 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-
     @PostMapping("/sign-up")
     public ResponseEntity<MemberPostDto> signup(
             @Valid @RequestBody MemberPostDto memberDto
