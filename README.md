@@ -12,6 +12,12 @@
 
 ### 🛠️ Tech Stack
 
+### Front
+
+<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"> <img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white"> ![Redux-toolkit](https://img.shields.io/badge/reduxtoolkit-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white) ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+
+### Back
+
 <hr>
 
 ### 🗂️ Pages
