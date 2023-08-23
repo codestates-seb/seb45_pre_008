@@ -67,7 +67,12 @@ const Nav = () => {
         <NavItem className="nav-public">PUBLIC</NavItem>
         <NavItem>
           <NavLink
-            className={location.pathname === '/questions' ? 'clicked' : ''}
+            className={
+              location.pathname === '/questions' ||
+              location.pathname === '/search'
+                ? 'clicked'
+                : ''
+            }
             padding={'4px 4px 4px 8px'}
             to="/questions"
           >
